@@ -91,6 +91,18 @@ public class Board {
             }
         }
     }
+
+    public Car getCarsAt(int x, int y) {
+        for (Car car : cars) {
+            int[][] positions = car.posisiCar();
+            for (int[] pos : positions) {
+                if (pos[0] == x && pos[1] == y) {
+                    return car;
+                }
+            }
+        }
+        return null;
+    }
     
     public void setCars(Car[] cars) {
         this.cars = cars;
