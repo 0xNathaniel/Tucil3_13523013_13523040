@@ -22,12 +22,14 @@ public class Greedy {
         PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(s -> s.getHValue()));
         
         List<Move> initialMoves = new ArrayList<>();
+
         int initialHValue;
         if (heuristic.equals("blockingCars")) {
             initialHValue = State.calculateBlockingCarsHeuristic(initialBoard);
         } else {
             initialHValue = State.calculateBlockingCarsHeuristic(initialBoard); // Nanti ganti jadi heuristic ke-2
         }
+
         queue.add(new State(initialBoard.copy(), initialMoves, initialHValue));
         
         
@@ -55,7 +57,13 @@ public class Greedy {
                     List<Move> nextMoves = new ArrayList<>(currentMoves);
                     nextMoves.add(move);
                     
-                    int hValue = State.calculateBlockingCarsHeuristic(nextBoard);
+                    int hValue;
+                    if (heuristic.equals("blockingCars")) {
+                        hValue = State.calculateBlockingCarsHeuristic(initialBoard);
+                    } else {
+                        hValue = State.calculateBlockingCarsHeuristic(initialBoard); // Nanti ganti jadi heuristic ke-2
+                    }
+
                     queue.add(new State(nextBoard, nextMoves, hValue));
                 }
             }
