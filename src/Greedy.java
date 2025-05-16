@@ -10,14 +10,6 @@ public class Greedy {
         this.visitedStates = new HashSet<>();
         this.nodesExplored = 0;
     }
-    
-    private String getBoardStateString(Board board) {
-        StringBuilder sb = new StringBuilder();
-        for (Car car : board.getCars()) {
-            sb.append(car.getId()).append(car.getX()).append(car.getY());
-        }
-        return sb.toString();
-    }
 
     /* String heuristic: metode heuristic yang dipilih */
     public List<Move> solve(String heuristic) {
@@ -48,7 +40,7 @@ public class Greedy {
             if (currentBoard.isSolved()) {
                 return currentMoves;
             }
-            String stateString = getBoardStateString(currentBoard);
+            String stateString = State.getBoardStateString(currentBoard);
             if (visitedStates.contains(stateString)) { //klo udah pernah dikunjungi
                 continue;
             } else {
@@ -58,7 +50,7 @@ public class Greedy {
                 Board nextBoard = currentBoard.copy(); //buat copy, biar bisa itung heuristic
                 move.applyMove(nextBoard, move);
                 
-                String nextStateString = getBoardStateString(nextBoard);
+                String nextStateString = State.getBoardStateString(nextBoard);
                 if (!visitedStates.contains(nextStateString)) {
                     List<Move> nextMoves = new ArrayList<>(currentMoves);
                     nextMoves.add(move);
