@@ -1,5 +1,3 @@
-<<<<<<< HEAD:src/TestLoad.java
-=======
 package rush.hour.lib;
 import java.io.File;
 import java.util.Scanner;
@@ -49,4 +47,3 @@ public class TestLoad {
         }
     }
 }
->>>>>>> 343154d6155a2be5674cd51090320ebb740a972c:src/rushhour/src/main/java/rush/hour/lib/TestLoad.java

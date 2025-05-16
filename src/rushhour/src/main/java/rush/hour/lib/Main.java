@@ -1,17 +1,10 @@
-<<<<<<< HEAD:src/Main.java
-// import javafx.application.Application;
-// import javafx.scene.Scene;
-// import javafx.scene.control.Label;
-// import javafx.scene.layout.StackPane;
-// import javafx.stage.Stage;
-=======
+
 package rush.hour.lib;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
->>>>>>> 343154d6155a2be5674cd51090320ebb740a972c:src/rushhour/src/main/java/rush/hour/lib/Main.java
 
 // public class Main extends Application {
     
