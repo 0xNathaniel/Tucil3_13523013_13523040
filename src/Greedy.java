@@ -11,61 +11,6 @@ public class Greedy {
         this.nodesExplored = 0;
     }
     
-    private int calculateHeuristic(Board board) {
-    Car primaryCar = null;
-    for (Car car : board.getCars()) {
-        if (car.isPrimary()) {
-            primaryCar = car;
-            break;
-        }
-    }
-    
-    if (primaryCar == null) return 9999999;
-    
-    int doorX = board.getDoorX();
-    int doorY = board.getDoorY();
-    
-    int distance = 0;
-    
-    if (primaryCar.isHorizontal()) {
-        distance = doorX - (primaryCar.getX() + primaryCar.getLength());
-        
-        Set<Car> blockingCars = new HashSet<>();
-        for (int x = primaryCar.getX() + primaryCar.getLength(); x < doorX; x++) {
-            if (!board.isCellEmpty(x, primaryCar.getY())) {
-                Car carAtPosition = board.getCarsAt(x, primaryCar.getY());
-                if (carAtPosition != null) {
-                    blockingCars.add(carAtPosition);
-                }
-            }
-        }
-        
-        return distance + blockingCars.size() * 2;
-    }  else {
-            distance = doorY - (primaryCar.getY() + primaryCar.getLength());
-            if (doorY == 0) { 
-                distance = primaryCar.getY();
-            }
-            
-            int blockingCars = 0;
-            if (doorY > primaryCar.getY()) {
-                for (int y = primaryCar.getY() + primaryCar.getLength(); y < doorY; y++) {
-                    if (!board.isCellEmpty(primaryCar.getX(), y)) {
-                        blockingCars++;
-                    }
-                }
-            } else {
-                for (int y = 0; y < primaryCar.getY(); y++) {
-                    if (!board.isCellEmpty(primaryCar.getX(), y)) {
-                        blockingCars++;
-                    }
-                }
-            }
-            
-            return distance + blockingCars * 2;
-        }
-    }
-    
     private String getBoardStateString(Board board) {
         StringBuilder sb = new StringBuilder();
         for (Car car : board.getCars()) {
@@ -78,7 +23,7 @@ public class Greedy {
         PriorityQueue<State> queue = new PriorityQueue<>();
         
         List<Move> initialMoves = new ArrayList<>();
-        int initialHValue = calculateHeuristic(initialBoard);
+        int initialHValue = State.calculateBlockingCarsHeuristic(initialBoard);
         queue.add(new State(initialBoard.copy(), initialMoves, initialHValue));
         
         
@@ -106,7 +51,7 @@ public class Greedy {
                     List<Move> nextMoves = new ArrayList<>(currentMoves);
                     nextMoves.add(move);
                     
-                    int hValue = calculateHeuristic(nextBoard);
+                    int hValue = State.calculateBlockingCarsHeuristic(nextBoard);
                     queue.add(new State(nextBoard, nextMoves, hValue));
                 }
             }
