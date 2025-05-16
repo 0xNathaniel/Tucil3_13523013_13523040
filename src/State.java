@@ -124,6 +124,34 @@ public class State implements Comparable<State> { //kelas buat nampung state boa
             return distance + blockingCars * 2;
         }
     }
+
+    public static int calculateExitDistanceHeuristic(Board board) {
+        Car primaryCar = null;
+        for (Car car : board.getCars()) {
+            if (car.isPrimary()) {
+                primaryCar = car;
+                break;
+            }
+        }
+        
+        if (primaryCar == null) return 9999999;
+        
+        int doorX = board.getDoorX();
+        int doorY = board.getDoorY();
+        
+        int distance = 0;
+        
+        if (primaryCar.isHorizontal()) {
+            distance = doorX - (primaryCar.getX() + primaryCar.getLength());
+            return distance;
+        } else {
+            distance = doorY - (primaryCar.getY() + primaryCar.getLength());
+            if (doorY == 0) { 
+                distance = primaryCar.getY();
+            }
+            return distance;
+        }
+    }
     
     @Override
     public int compareTo(State other) {
