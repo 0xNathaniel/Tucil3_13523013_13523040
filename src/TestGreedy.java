@@ -59,7 +59,7 @@ public class TestGreedy {
                 board.printPlayableArea();
                 
                 Greedy greedy = new Greedy(board);
-                List<Move> solution = greedy.solve();
+                List<Move> solution = greedy.solve("blockingCars");
                 
                 if (solution != null) {
                     System.out.println("\nSolution found with " + solution.size() + " moves!");
