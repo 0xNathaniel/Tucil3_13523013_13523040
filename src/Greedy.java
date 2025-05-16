@@ -13,10 +13,9 @@ public class Greedy {
 
     /* String heuristic: metode heuristic yang dipilih */
     public List<Move> solve(String heuristic) {
-        if (!heuristic.equals("blockingCars") || 
-            !heuristic.equals("otherHeuristic")) {
+        if (!heuristic.equals("blockingCars") && !heuristic.equals("otherHeuristic")) {
             System.out.println("Invalid heuristic.");
-            return new ArrayList<Move>(); // Empty list
+            return new ArrayList<Move>();
         }
 
         PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(s -> s.getHValue()));
@@ -59,9 +58,9 @@ public class Greedy {
                     
                     int hValue;
                     if (heuristic.equals("blockingCars")) {
-                        hValue = State.calculateBlockingCarsHeuristic(initialBoard);
+                        hValue = State.calculateBlockingCarsHeuristic(nextBoard);
                     } else {
-                        hValue = State.calculateBlockingCarsHeuristic(initialBoard); // Nanti ganti jadi heuristic ke-2
+                        hValue = State.calculateBlockingCarsHeuristic(nextBoard); // Nanti ganti jadi heuristic ke-2
                     }
 
                     queue.add(new State(nextBoard, nextMoves, hValue));
