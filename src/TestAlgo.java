@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.List;
 
-public class TestGreedy {
+public class TestAlgo {
     public static void main(String[] args) {
         // testGreedyWithExamplePuzzle();
         testGreedyWithLoadedPuzzle();
@@ -58,12 +58,20 @@ public class TestGreedy {
                 System.out.println("Initial board:");
                 board.printPlayableArea();
                 
-                Greedy greedy = new Greedy(board);
-                List<Move> solution = greedy.solve();
-                
+                //Greedy greedy = new Greedy(board);
+                // List<Move> solution = greedy.solve("blockingCars");
+                //List<Move> solution = greedy.solve("exitDistance");
+                //UCS ucs = new UCS(board);
+                //List<Move> solution = ucs.solve();
+                AStar aStar = new AStar(board);
+                //List<Move> solution = aStar.solve("blockingCars");
+                List<Move> solution = aStar.solve("exitDistance");
+
                 if (solution != null) {
                     System.out.println("\nSolution found with " + solution.size() + " moves!");
-                    greedy.displaySolution(solution);
+                    //greedy.displaySolution(solution);
+                    //ucs.displaySolution(solution);
+                    aStar.displaySolution(solution);
                 } else {
                     System.out.println("\nNo solution found.");
                 }

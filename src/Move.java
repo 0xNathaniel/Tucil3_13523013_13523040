@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Move {
     private char carId;
     private String direction;
@@ -42,5 +45,26 @@ public class Move {
         }
         
         board.updateGrid();
+    }
+
+    public static List<Move> getPossibleMoves(Board board) {
+        List<Move> possibleMoves = new ArrayList<>();
+        
+        for (Car car : board.getCars()) {
+            if (car.canMoveUp(board)) {
+                possibleMoves.add(new Move(car.getId(), "up"));
+            }
+            if (car.canMoveDown(board)) {
+                possibleMoves.add(new Move(car.getId(), "down"));
+            }
+            if (car.canMoveLeft(board)) {
+                possibleMoves.add(new Move(car.getId(), "left"));
+            }
+            if (car.canMoveRight(board)) {
+                possibleMoves.add(new Move(car.getId(), "right"));
+            }
+        }
+        
+        return possibleMoves;
     }
 }
