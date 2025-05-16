@@ -66,27 +66,6 @@ public class Greedy {
         }
     }
     
-    private List<Move> getPossibleMoves(Board board) {
-        List<Move> possibleMoves = new ArrayList<>();
-        
-        for (Car car : board.getCars()) {
-            if (car.canMoveUp(board)) {
-                possibleMoves.add(new Move(car.getId(), "up"));
-            }
-            if (car.canMoveDown(board)) {
-                possibleMoves.add(new Move(car.getId(), "down"));
-            }
-            if (car.canMoveLeft(board)) {
-                possibleMoves.add(new Move(car.getId(), "left"));
-            }
-            if (car.canMoveRight(board)) {
-                possibleMoves.add(new Move(car.getId(), "right"));
-            }
-        }
-        
-        return possibleMoves;
-    }
-    
     private String getBoardStateString(Board board) {
         StringBuilder sb = new StringBuilder();
         for (Car car : board.getCars()) {
@@ -118,7 +97,7 @@ public class Greedy {
             } else {
                 visitedStates.add(stateString); //tambahin ke visited
             }
-            for (Move move : getPossibleMoves(currentBoard)) { //iterasi semua kemungkinan gerakan
+            for (Move move : Move.getPossibleMoves(currentBoard)) { //iterasi semua kemungkinan gerakan
                 Board nextBoard = currentBoard.copy(); //buat copy, biar bisa itung heuristic
                 move.applyMove(nextBoard, move);
                 
