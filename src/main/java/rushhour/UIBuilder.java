@@ -47,7 +47,7 @@ public class UIBuilder {
         controlPanel.setAlignment(Pos.CENTER);
         controlPanel.getStyleClass().add("control-panel");
         
-        // Algorithm selection
+        // Pemilihan algoritma
         HBox algoHBox = new HBox(10);
         algoHBox.setAlignment(Pos.CENTER);
         
@@ -67,7 +67,7 @@ public class UIBuilder {
         
         algoHBox.getChildren().addAll(algoLabel, algoBox, heuristicLabel, heuristicBox);
         
-        // Button area
+        // Area Button
         HBox buttonBox = new HBox(15);
         buttonBox.setAlignment(Pos.CENTER);
         
@@ -102,7 +102,7 @@ public class UIBuilder {
         
         statusLabel.getStyleClass().add("status-label");
         
-        // Connect event handlers
+        // Event handlers
         algoBox.setOnAction(onAlgoChanged);
         loadButton.setOnAction(onLoadClicked);
         solveButton.setOnAction(onSolveClicked);

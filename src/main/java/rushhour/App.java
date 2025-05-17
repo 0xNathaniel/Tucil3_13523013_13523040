@@ -71,7 +71,7 @@ public class App extends Application {
         speedLabel = new Label("Animation Speed: 1.0x");
         moveCountLabel = new Label("Move: 0 / 0");
         
-        // Build UI using the modular components
+        // Komponen-komponen utama UI
         HBox titleBox = UIBuilder.createTitleArea();
         mainContainer.setTop(titleBox);
         
@@ -99,10 +99,28 @@ public class App extends Application {
         );
         mainContainer.setRight(animationControls);
         
-        Scene scene = new Scene(mainContainer, 750, 600);
+        Scene scene = new Scene(mainContainer, 900, 750);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        try {
+            // Try loading from different possible paths
+            javafx.scene.image.Image icon = new javafx.scene.image.Image(getClass().getResourceAsStream("/rushhour/RushHourLogo.png"));
+            
+            if (icon.isError()) {
+                // Fallback to other possible paths
+                icon = new javafx.scene.image.Image(getClass().getResourceAsStream("RushHourLogo.png"));
+            }
+            
+            if (!icon.isError()) {
+                stage.getIcons().add(icon);
+            } else {
+                System.err.println("Could not load application icon.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading application icon: " + e.getMessage());
+        }
         
-        // Initialize board
+        // Inisialisasi board
         board = new Board(6, 6);
         BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
         
