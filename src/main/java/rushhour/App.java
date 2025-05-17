@@ -309,9 +309,6 @@ public class App extends Application {
         if (scaleFactor > 1.0) {
             gridPane.setTranslateX(Math.max(-maxX, Math.min(maxX, gridPane.getTranslateX())));
             gridPane.setTranslateY(Math.max(-maxY, Math.min(maxY, gridPane.getTranslateY())));
-        } else {
-            gridPane.setTranslateX(0);
-            gridPane.setTranslateY(0);
         }
     }
 
