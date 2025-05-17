@@ -11,6 +11,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.effect.DropShadow;
 import javafx.util.Duration;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.transform.Scale;
+import javafx.geometry.Point2D;
 
 import rushhour.lib.*;
 
@@ -40,9 +43,15 @@ public class App extends Application {
     private int currentMoveIndex = 0;
     private char currentlyMovingCar = '.';
     
+    private StackPane boardContainer;
+    private double scaleFactor = 1.0;
+    private double minScale = 0.5;
+    private double maxScale = 3.0;
+    
     private static final double DEFAULT_SPEED = 1.0;
     private static final double MIN_SPEED = 0.1;
     private static final double MAX_SPEED = 3.0;
+    private static final double ZOOM_FACTOR = 1.1;
 
     public static void main(String[] args) {
         launch();
@@ -53,7 +62,6 @@ public class App extends Application {
         BorderPane mainContainer = new BorderPane();
         mainContainer.getStyleClass().add("main-container");
         
-        // Initialize controls
         gridPane = new GridPane();
         algoBox = new ComboBox<>();
         heuristicBox = new ComboBox<>();
@@ -71,16 +79,22 @@ public class App extends Application {
         speedLabel = new Label("Animation Speed: 1.0x");
         moveCountLabel = new Label("Move: 0 / 0");
         
-        // Komponen-komponen utama UI
         HBox titleBox = UIBuilder.createTitleArea();
         mainContainer.setTop(titleBox);
         
-        VBox boardArea = UIBuilder.createBoardArea(gridPane, moveCountLabel);
+        boardContainer = new StackPane();
+        boardContainer.getChildren().add(gridPane);
+        VBox boardArea = UIBuilder.createBoardArea(boardContainer, moveCountLabel);
+        
+        setupZoomHandlers(boardContainer);
+        
         mainContainer.setCenter(boardArea);
+        
+        HBox zoomControls = createZoomControls();
         
         VBox controlPanel = UIBuilder.createControlPanel(
             algoBox, heuristicBox, loadButton, solveButton, 
-            nodesExplored, timeElapsed, statusLabel,
+            nodesExplored, timeElapsed, statusLabel, zoomControls,
             e -> handleAlgorithmChange(),
             e -> handleLoad(),
             e -> handleSolve()
@@ -103,11 +117,9 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         try {
-            // Try loading from different possible paths
             javafx.scene.image.Image icon = new javafx.scene.image.Image(getClass().getResourceAsStream("/rushhour/RushHourLogo.png"));
             
             if (icon.isError()) {
-                // Fallback to other possible paths
                 icon = new javafx.scene.image.Image(getClass().getResourceAsStream("RushHourLogo.png"));
             }
             
@@ -120,7 +132,6 @@ public class App extends Application {
             System.err.println("Error loading application icon: " + e.getMessage());
         }
         
-        // Inisialisasi board
         board = new Board(6, 6);
         BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
         
@@ -128,6 +139,122 @@ public class App extends Application {
         stage.setTitle("Rush Hour Puzzle Solver");
         stage.show();
     }
+    
+    private HBox createZoomControls() {
+        HBox zoomControls = new HBox(10);
+        zoomControls.getStyleClass().add("zoom-controls");
+        
+        Button zoomInButton = new Button("+");
+        zoomInButton.getStyleClass().add("zoom-button");
+        zoomInButton.setOnAction(e -> zoom(ZOOM_FACTOR));
+        
+        Button zoomOutButton = new Button("-");
+        zoomOutButton.getStyleClass().add("zoom-button");
+        zoomOutButton.setOnAction(e -> zoom(1/ZOOM_FACTOR));
+        
+        Button resetZoomButton = new Button("Reset");
+        resetZoomButton.getStyleClass().add("zoom-button");
+        resetZoomButton.setOnAction(e -> resetZoom());
+        
+        Label zoomLabel = new Label("Zoom:");
+        zoomLabel.getStyleClass().add("zoom-label");
+        
+        zoomControls.getChildren().addAll(zoomLabel, zoomOutButton, resetZoomButton, zoomInButton);
+        return zoomControls;
+    }
+    
+    private void setupZoomHandlers(StackPane boardContainer) {
+    boardContainer.setOnScroll(this::handleScroll);
+    
+    Scale scale = new Scale();
+    scale.setPivotX(225);
+    scale.setPivotY(225);
+    scale.setX(scaleFactor);
+    scale.setY(scaleFactor);
+    gridPane.getTransforms().add(scale);
+    
+    gridPane.setTranslateX(0);
+    gridPane.setTranslateY(0);
+    
+    boardContainer.setOnMousePressed(event -> {
+        boardContainer.setCursor(javafx.scene.Cursor.CLOSED_HAND);
+        boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
+        event.consume();
+    });
+    
+    boardContainer.setOnMouseDragged(event -> {
+        if (boardContainer.getUserData() instanceof Point2D) {
+            Point2D dragStart = (Point2D) boardContainer.getUserData();
+            double deltaX = event.getSceneX() - dragStart.getX();
+            double deltaY = event.getSceneY() - dragStart.getY();
+            
+            gridPane.setTranslateX(gridPane.getTranslateX() + deltaX);
+            gridPane.setTranslateY(gridPane.getTranslateY() + deltaY);
+            
+            boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
+            event.consume();
+        }
+    });
+    
+    boardContainer.setOnMouseReleased(event -> {
+        boardContainer.setCursor(javafx.scene.Cursor.DEFAULT);
+        enforceGridBounds();
+        event.consume();
+    });
+}
+
+    private void enforceGridBounds() {
+    double boardWidth = 450;
+    double boardHeight = 450;
+    double gridWidth = boardWidth * scaleFactor;
+    double gridHeight = boardHeight * scaleFactor;
+    
+    double maxX = (gridWidth - boardWidth) / 2;
+    double maxY = (gridHeight - boardHeight) / 2;
+    
+    if (scaleFactor > 1.0) {
+        gridPane.setTranslateX(Math.max(-maxX, Math.min(maxX, gridPane.getTranslateX())));
+        gridPane.setTranslateY(Math.max(-maxY, Math.min(maxY, gridPane.getTranslateY())));
+    } else {
+        gridPane.setTranslateX(0);
+        gridPane.setTranslateY(0);
+    }
+}
+
+    private void handleScroll(ScrollEvent event) {
+        double delta = event.getDeltaY();
+        double scaleFactor = (delta > 0) ? ZOOM_FACTOR : 1/ZOOM_FACTOR;
+        zoom(scaleFactor);
+        event.consume();
+    }
+    
+    private void zoom(double factor) {
+    double newScale = scaleFactor * factor;
+    
+    if (newScale >= minScale && newScale <= maxScale) {
+        scaleFactor = newScale;
+        
+        Scale scale = (Scale) gridPane.getTransforms().get(0);
+        scale.setX(scaleFactor);
+        scale.setY(scaleFactor);
+        
+        enforceGridBounds();
+        
+        statusLabel.setText("Zoom: " + String.format("%.1f", scaleFactor * 100) + "%");
+    }
+}
+    
+   private void resetZoom() {
+    scaleFactor = 1.0;
+    Scale scale = (Scale) gridPane.getTransforms().get(0);
+    scale.setX(scaleFactor);
+    scale.setY(scaleFactor);
+    
+    gridPane.setTranslateX(0);
+    gridPane.setTranslateY(0);
+    
+    statusLabel.setText("Zoom reset to 100%");
+}
     
     private void handleAlgorithmChange() {
         String selected = algoBox.getValue();
@@ -299,7 +426,8 @@ public class App extends Application {
                 if (moveIndex == moves.size() - 1) {
                     Rectangle mainCar = carRectangles.get('P');
                     ParallelTransition celebration = AnimationUtils.createCelebrationEffect(mainCar);
-                    celebration.play();                    playButton.setDisable(true);
+                    celebration.play();                    
+                    playButton.setDisable(true);
                     pauseButton.setDisable(true);
                     statusLabel.setText("🎉 Puzzle solved! The car has escaped! 🎉");
                 }
@@ -384,6 +512,7 @@ public class App extends Application {
         }
         
         for (Rectangle rect : carRectangles.values()) {
-            AnimationUtils.resetRectangleAppearance(rect, (Color)rect.getFill());        }
+            AnimationUtils.resetRectangleAppearance(rect, (Color)rect.getFill());        
+        }
     }
 }

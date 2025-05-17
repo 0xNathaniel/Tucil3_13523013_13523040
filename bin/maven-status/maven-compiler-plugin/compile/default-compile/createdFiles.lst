@@ -7,6 +7,7 @@ module-info.class
 rushhour\lib\Board.class
 rushhour\lib\Load.class
 rushhour\UIBuilder.class
+rushhour\lib\Algorithm.class
 rushhour\lib\Car.class
 rushhour\lib\UCS.class
 rushhour\AnimationUtils.class

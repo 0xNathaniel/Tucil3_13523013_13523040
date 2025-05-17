@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class UIBuilder {
@@ -24,30 +25,50 @@ public class UIBuilder {
         return titleBox;
     }
     
-    public static VBox createBoardArea(GridPane gridPane, Label moveCountLabel) {
-        VBox boardArea = new VBox(15);
-        boardArea.setAlignment(Pos.CENTER);
-        boardArea.setPadding(new Insets(10));
-        boardArea.getStyleClass().add("board-area");
-        
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.getStyleClass().add("grid-pane");
-        
-        moveCountLabel.getStyleClass().add("status-label");
-        
-        boardArea.getChildren().addAll(gridPane, moveCountLabel);
-        
-        return boardArea;
-    }
+    public static VBox createBoardArea(StackPane boardContainer, Label moveCountLabel) {
+    VBox boardArea = new VBox(15);
+    boardArea.setAlignment(Pos.CENTER);
+    boardArea.setPadding(new Insets(10));
+    boardArea.getStyleClass().add("board-area");
     
-    public static VBox createControlPanel(ComboBox<String> algoBox, ComboBox<String> heuristicBox,Button loadButton,Button solveButton,Label nodesExplored,Label timeElapsed,Label statusLabel,EventHandler<ActionEvent> onAlgoChanged,EventHandler<ActionEvent> onLoadClicked,EventHandler<ActionEvent> onSolveClicked) {
+    javafx.scene.shape.Rectangle clip = new javafx.scene.shape.Rectangle(450, 450);
+    clip.setArcWidth(10);
+    clip.setArcHeight(10);
+    boardContainer.setClip(clip);
+    
+    boardContainer.setMinSize(450, 450);
+    boardContainer.setMaxSize(450, 450);
+    boardContainer.setPrefSize(450, 450);
+    
+    boardContainer.getStyleClass().add("board-container");
+    
+    boardContainer.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #999; -fx-border-width: 2px; -fx-border-radius: 5px;");
+    
+    moveCountLabel.getStyleClass().add("status-label");
+    
+    boardArea.getChildren().addAll(boardContainer, moveCountLabel);
+    
+    return boardArea;
+}
+    
+    public static VBox createControlPanel(
+            ComboBox<String> algoBox, 
+            ComboBox<String> heuristicBox,
+            Button loadButton,
+            Button solveButton,
+            Label nodesExplored,
+            Label timeElapsed,
+            Label statusLabel,
+            HBox zoomControls,
+            EventHandler<ActionEvent> onAlgoChanged,
+            EventHandler<ActionEvent> onLoadClicked,
+            EventHandler<ActionEvent> onSolveClicked) {
             
         VBox controlPanel = new VBox(10);
         controlPanel.setPadding(new Insets(15));
         controlPanel.setAlignment(Pos.CENTER);
         controlPanel.getStyleClass().add("control-panel");
         
-        // Pemilihan algoritma
         HBox algoHBox = new HBox(10);
         algoHBox.setAlignment(Pos.CENTER);
         
@@ -67,7 +88,6 @@ public class UIBuilder {
         
         algoHBox.getChildren().addAll(algoLabel, algoBox, heuristicLabel, heuristicBox);
         
-        // Area Button
         HBox buttonBox = new HBox(15);
         buttonBox.setAlignment(Pos.CENTER);
         
@@ -80,7 +100,6 @@ public class UIBuilder {
         
         buttonBox.getChildren().addAll(loadButton, solveButton);
         
-        // Statistics area
         HBox statsBox = new HBox(20);
         statsBox.setAlignment(Pos.CENTER);
         
@@ -102,16 +121,32 @@ public class UIBuilder {
         
         statusLabel.getStyleClass().add("status-label");
         
-        // Event handlers
+        HBox controlRow = new HBox(20);
+        controlRow.setAlignment(Pos.CENTER);
+        controlRow.getChildren().addAll(zoomControls);
+        
         algoBox.setOnAction(onAlgoChanged);
         loadButton.setOnAction(onLoadClicked);
         solveButton.setOnAction(onSolveClicked);
         
-        controlPanel.getChildren().addAll(algoHBox, buttonBox, statsBox, statusLabel);
+        controlPanel.getChildren().addAll(algoHBox, buttonBox, statsBox, controlRow, statusLabel);
         return controlPanel;
     }
     
-    public static VBox createAnimationControls(Button playButton,Button pauseButton, Button stopButton,Button slowDownButton,Button speedUpButton, Slider animationSpeedSlider,Label speedLabel,EventHandler<ActionEvent> onPlayClicked,EventHandler<ActionEvent> onPauseClicked,EventHandler<ActionEvent> onStopClicked,EventHandler<ActionEvent> onSlowDownClicked,EventHandler<ActionEvent> onSpeedUpClicked,ChangeListener<Number> onSpeedChanged) {
+    public static VBox createAnimationControls(
+            Button playButton,
+            Button pauseButton, 
+            Button stopButton,
+            Button slowDownButton,
+            Button speedUpButton,
+            Slider animationSpeedSlider,
+            Label speedLabel,
+            EventHandler<ActionEvent> onPlayClicked,
+            EventHandler<ActionEvent> onPauseClicked,
+            EventHandler<ActionEvent> onStopClicked,
+            EventHandler<ActionEvent> onSlowDownClicked,
+            EventHandler<ActionEvent> onSpeedUpClicked,
+            ChangeListener<Number> onSpeedChanged) {
             
         VBox animationPanel = new VBox(15);
         animationPanel.setPadding(new Insets(15));
