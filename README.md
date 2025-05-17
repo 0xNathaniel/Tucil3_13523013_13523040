@@ -24,7 +24,7 @@ Puzzle Rush Hour merupakan permainan logika grid 6x6 yang mengharuskan pemain un
 - File teks `.txt` berformat:
   - Baris pertama: ukuran papan (contoh: `6 6`)
   - Baris kedua: jumlah kendaraan
-  - Baris selanjutnya: grid puzzle berisi karakter mobil, `.` untuk kosong, dan `K` untuk pintu keluar
+  - Baris selanjutnya: grid puzzle berisi karakter mobil (P untuk primary car), `.` untuk kosong, dan `K` untuk pintu keluar
 
 Contoh file `.txt` input:
 
