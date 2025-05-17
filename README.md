@@ -11,6 +11,19 @@
 
 </div>
 
+## Table of Contents
+
+- [Program Description](#program-description)
+- [Input](#input)
+- [Output](#output)
+- [Fitur Utama](#fitur-utama)
+- [Tech Stack](#tech-stack)
+- [Struktur Folder](#struktur-folder)
+- [Getting Started: Requirement dan Instalasi](#getting-started-requirement-dan-instalasi)
+- [Authors](#authors)
+
+---
+
 ## Program Description
 
 Program ini adalah **penyelesai puzzle Rush Hour berbasis algoritma pathfinding dengan GUI JavaFX**. Pengguna dapat memuat konfigurasi puzzle dari file `.txt` dan memilih algoritma pencarian yang tersedia untuk menemukan solusi minimal dalam jumlah langkah.
@@ -77,6 +90,18 @@ PPBCE.K
 - GUI: **JavaFX**
 - Build System: **Maven**
 - Platform: **Cross-platform (Windows, Mac, Linux)**
+
+---
+
+### Struktur Folder
+
+- Implementasi algorithm: `src/main/java/rushhour/lib`
+- Implementasi GUI: `src/main/java/rushhour/`
+- Resource files: `src/main/resources/`
+- Test files: `src/test/java/rushhour/`
+- Konfigurasi Maven: `pom.xml`
+- Compiled files: `bin/`
+- Dokumentasi: `doc/`
 
 ---
 
