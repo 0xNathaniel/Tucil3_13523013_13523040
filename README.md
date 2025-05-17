@@ -109,7 +109,7 @@ PPBCE.K
 
 #### 1. Wajib Menggunakan JDK dan Maven
 
-Untuk menjalankan program inip, pastikan sistem kamu telah ter-installed:
+Untuk menjalankan program ini, pastikan sistem kamu telah ter-installed:
 
 - [Java Development Kit (JDK) 17 atau lebih tinggi](https://adoptium.net/en-GB/temurin/releases/)
 - [Apache Maven](https://maven.apache.org/download.cgi)
