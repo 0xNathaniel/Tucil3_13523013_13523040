@@ -71,6 +71,14 @@ public class State implements Comparable<State> { //kelas buat nampung state boa
         this.fValue = getGValue() + getHValue(); 
     }
 
+    public static int calculateHValue(String heuristic, Board board) {
+        if (heuristic.equals("blockingCars")) {
+            return State.calculateBlockingCarsHeuristic(board);
+        } else { // Exit Distance heuristic
+            return State.calculateExitDistanceHeuristic(board); // Nanti ganti jadi heuristic ke-2
+        }
+    }
+
     public static int calculateBlockingCarsHeuristic(Board board) {
         Car primaryCar = null;
         for (Car car : board.getCars()) {

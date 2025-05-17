@@ -1,19 +1,16 @@
 package rushhour.lib;
 import java.util.*;
 
-public class Fringe {
-    private Board initialBoard;
-    private Set<String> visitedStates;
-    private int nodesExplored;
-    private long timeElapsed;
-
+// Lihat Class Algorithm untuk melihat class member
+public class Fringe extends Algorithm{
+    /* Cukup memasukkan initialBoard state yang ingin di-solve
+     * Gunakan solve() untuk memberikan solusi berdasarkan algo Fringe */
     public Fringe(Board board) {
-        this.initialBoard = board;
-        this.visitedStates = new HashSet<>();
-        this.nodesExplored = 0;
-        this.timeElapsed = 0;
+        super(board);
     }
 
+    /* String heuristic: metode heuristic yang dipilih */
+    @Override
     public List<Move> solve(String heuristic) {
         // Pengecekan metode heuristic yang digunakan
         if (!heuristic.equals("blockingCars") && !heuristic.equals("exitDistance")) {
@@ -21,26 +18,23 @@ public class Fringe {
             return new ArrayList<Move>(); // Empty list
         }
 
+        // Waktu mulai
         long start = System.currentTimeMillis();
 
-        /* Salah satu karakteristik utama dari Fringe search
-         * yaitu terdapat now dan later*/
+        /* Inisialisasi data structure
+         * Salah satu karakteristik utama dari Fringe search
+         * yaitu terdapat list now dan later*/
         Deque<State> now = new LinkedList<State>();
         Deque<State> later = new LinkedList<State>();
 
         /* Nilai initial threshold adalah nilai f(n) dari state awal
         *  dengan g(n) = 0 dan h(n) bergantung pada jenis heuristic yang dipilih*/
-        int initialHValue;
-        if (heuristic.equals("blockingCars")) {
-            initialHValue = State.calculateBlockingCarsHeuristic(initialBoard);
-        } else { // Exit Distance Heuristic
-            initialHValue = State.calculateExitDistanceHeuristic(initialBoard);
-        }
-
+        int initialHValue = State.calculateHValue(heuristic, initialBoard);
         State initialState = new State(initialBoard, new ArrayList<>(), initialHValue);
         int threshold = initialState.getFValue();
         int increment = 5;
 
+        // Inisialisasi list now
         now.add(initialState);
         
         // Proses Fringe search
@@ -51,20 +45,25 @@ public class Fringe {
                 List<Move> currentMoves = currentState.getMoves(); 
 
                 nodesExplored++;
-
+                // Goal state
                 if (currentBoard.isSolved()) {
+                    // Waktu selesai
                     long end = System.currentTimeMillis();
                     timeElapsed = end - start;
+
                     return currentMoves;
                 }
 
+                /* Validasi duplikat
+                 * Untuk menghindari cycle atau repeated states */
                 String stateString = State.getBoardStateString(currentBoard);
                 if (visitedStates.contains(stateString)) {
                     continue;
                 } else {
                     visitedStates.add(stateString);
                 }
-
+                
+                // Iterasi seluruh kemungkinan move pada state terkini
                 for (Move move : Move.getPossibleMoves(currentBoard)) {
                     Board nextBoard = currentBoard.copy();
                     move.applyMove(nextBoard, move);
@@ -73,13 +72,7 @@ public class Fringe {
                     if (!visitedStates.contains(nextStateString)) {
                         List<Move> nextMoves = new ArrayList<>(currentMoves);
                         nextMoves.add(move);
-
-                        int hValue;
-                        if (heuristic.equals("blockingCars")) {
-                            hValue = State.calculateBlockingCarsHeuristic(nextBoard);
-                        } else { // Exit Distance heuristic
-                            hValue = State.calculateExitDistanceHeuristic(nextBoard); // Nanti ganti jadi heuristic ke-2
-                        }
+                        int hValue = State.calculateHValue(heuristic, nextBoard);
                         
                         State newState = new State(nextBoard, nextMoves, hValue);
                         if (newState.getFValue() <= threshold) {
@@ -97,39 +90,13 @@ public class Fringe {
             // Increment nilai threshold baru
             threshold += increment;
             // Update now dan later
-            now.addAll(later);
-            later.clear();
+            now.addAll(later); // now = later
+            later.clear();     // later = []
         }
 
+        // Waktu selesai
         long end = System.currentTimeMillis();
         timeElapsed = end - start;
         return new ArrayList<>();
-    }
-
-    public void displaySolution(List<Move> solution) {
-        if (solution == null) {
-            System.out.println("No solution found.");
-            return;
-        }
-        
-        Board board = initialBoard.copy();
-        System.out.println("Papan Awal");
-        board.printPlayableArea();
-        
-        for (int i = 0; i < solution.size(); i++) {
-            Move move = solution.get(i);
-            move.applyMove(board, move);
-            
-            System.out.println("Gerakan " + (i + 1) + ": " + move);
-            board.printPlayableArea();
-        }
-    }
-
-    public int getNodesExplored() {
-        return nodesExplored;
-    }
-
-    public long getTimeElapsed() {
-        return timeElapsed;
     }
 }
