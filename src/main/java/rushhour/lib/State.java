@@ -74,12 +74,104 @@ public class State implements Comparable<State> { //kelas buat nampung state boa
     public static int calculateHValue(String heuristic, Board board) {
         if (heuristic.equals("blockingCars")) {
             return State.calculateBlockingCarsHeuristic(board);
-        } else { // Exit Distance heuristic
-            return State.calculateExitDistanceHeuristic(board); // Nanti ganti jadi heuristic ke-2
+        } else if (heuristic.equals("exitDistance")) {
+            return State.calculateExitDistanceHeuristic(board); 
+        } else {
+            return State.calculateBlockingCarsAndExitDistanceHeuristic(board);
         }
     }
 
     public static int calculateBlockingCarsHeuristic(Board board) {
+        Car primaryCar = null;
+
+        // Cari mobil utama (primary car)
+        for (Car car : board.getCars()) {
+            if (car.isPrimary()) {
+                primaryCar = car;
+                break;
+            }
+        }
+
+        if (primaryCar == null) return Integer.MAX_VALUE;
+
+        int doorX = board.getDoorX();
+        int doorY = board.getDoorY();
+
+        // Horizontal case
+        if (primaryCar.isHorizontal()) {
+            Set<Car> blockingCars = new HashSet<>();
+
+            // Periksa semua sel antara ujung mobil utama sampai ke pintu keluar
+            for (int x = primaryCar.getX() + primaryCar.getLength(); x < doorX; x++) {
+                if (!board.isCellEmpty(x, primaryCar.getY())) {
+                    Car carAtPosition = board.getCarsAt(x, primaryCar.getY());
+                    if (carAtPosition != null && carAtPosition != primaryCar) {
+                        blockingCars.add(carAtPosition);
+                    }
+                }
+            }
+
+            return blockingCars.size();
+        }
+
+        // Vertical case
+        else {
+            Set<Car> blockingCars = new HashSet<>();
+
+            if (doorY > primaryCar.getY()) {
+                for (int y = primaryCar.getY() + primaryCar.getLength(); y < doorY; y++) {
+                    if (!board.isCellEmpty(primaryCar.getX(), y)) {
+                        Car carAtPosition = board.getCarsAt(primaryCar.getX(), y);
+                        if (carAtPosition != null && carAtPosition != primaryCar) {
+                            blockingCars.add(carAtPosition);
+                        }
+                    }
+                }
+            } else {
+                for (int y = 0; y < primaryCar.getY(); y++) {
+                    if (!board.isCellEmpty(primaryCar.getX(), y)) {
+                        Car carAtPosition = board.getCarsAt(primaryCar.getX(), y);
+                        if (carAtPosition != null && carAtPosition != primaryCar) {
+                            blockingCars.add(carAtPosition);
+                        }
+                    }
+                }
+            }
+
+            return blockingCars.size();
+        }
+    }
+
+
+    public static int calculateExitDistanceHeuristic(Board board) {
+        Car primaryCar = null;
+        for (Car car : board.getCars()) {
+            if (car.isPrimary()) {
+                primaryCar = car;
+                break;
+            }
+        }
+        
+        if (primaryCar == null) return 9999999;
+        
+        int doorX = board.getDoorX();
+        int doorY = board.getDoorY();
+        
+        int distance = 0;
+        
+        if (primaryCar.isHorizontal()) {
+            distance = doorX - (primaryCar.getX() + primaryCar.getLength());
+            return distance;
+        } else {
+            distance = doorY - (primaryCar.getY() + primaryCar.getLength());
+            if (doorY == 0) { 
+                distance = primaryCar.getY();
+            }
+            return distance;
+        }
+    }
+
+    public static int calculateBlockingCarsAndExitDistanceHeuristic(Board board) {
         Car primaryCar = null;
         for (Car car : board.getCars()) {
             if (car.isPrimary()) {
@@ -108,7 +200,7 @@ public class State implements Comparable<State> { //kelas buat nampung state boa
                 }
             }
             
-            return distance + blockingCars.size() * 2;
+            return distance + blockingCars.size();
         }  else {
                 distance = doorY - (primaryCar.getY() + primaryCar.getLength());
                 if (doorY == 0) { 
@@ -130,35 +222,7 @@ public class State implements Comparable<State> { //kelas buat nampung state boa
                     }
                 }
             
-            return distance + blockingCars * 2;
-        }
-    }
-
-    public static int calculateExitDistanceHeuristic(Board board) {
-        Car primaryCar = null;
-        for (Car car : board.getCars()) {
-            if (car.isPrimary()) {
-                primaryCar = car;
-                break;
-            }
-        }
-        
-        if (primaryCar == null) return 9999999;
-        
-        int doorX = board.getDoorX();
-        int doorY = board.getDoorY();
-        
-        int distance = 0;
-        
-        if (primaryCar.isHorizontal()) {
-            distance = doorX - (primaryCar.getX() + primaryCar.getLength());
-            return distance;
-        } else {
-            distance = doorY - (primaryCar.getY() + primaryCar.getLength());
-            if (doorY == 0) { 
-                distance = primaryCar.getY();
-            }
-            return distance;
+            return distance + blockingCars;
         }
     }
     

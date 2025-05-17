@@ -12,9 +12,11 @@ public class Greedy extends Algorithm {
     /* String heuristic: metode heuristic yang dipilih */
     @Override
     public List<Move> solve(String heuristic) {
-        if (!heuristic.equals("blockingCars") && !heuristic.equals("exitDistance")) {
+        if (!heuristic.equals("blockingCars") && 
+        !heuristic.equals("exitDistance") && 
+        !heuristic.equals("blockingCarsAndExitDistance")) {
             System.out.println("Invalid heuristic.");
-            return new ArrayList<Move>();
+            return new ArrayList<Move>(); // Empty list
         }
         
         // Waktu mulai

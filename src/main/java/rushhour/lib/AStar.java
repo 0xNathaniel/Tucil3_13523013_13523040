@@ -13,7 +13,9 @@ public class AStar extends Algorithm {
     @Override
     public List<Move> solve(String heuristic) {
         // Validasi input heuristic
-        if (!heuristic.equals("blockingCars") && !heuristic.equals("exitDistance")) {
+        if (!heuristic.equals("blockingCars") && 
+        !heuristic.equals("exitDistance") && 
+        !heuristic.equals("blockingCarsAndExitDistance")) {
             System.out.println("Invalid heuristic.");
             return new ArrayList<Move>(); // Empty list
         }
