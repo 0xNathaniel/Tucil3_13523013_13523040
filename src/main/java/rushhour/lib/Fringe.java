@@ -5,11 +5,13 @@ public class Fringe {
     private Board initialBoard;
     private Set<String> visitedStates;
     private int nodesExplored;
+    private long timeElapsed;
 
     public Fringe(Board board) {
         this.initialBoard = board;
         this.visitedStates = new HashSet<>();
         this.nodesExplored = 0;
+        this.timeElapsed = 0;
     }
 
     public List<Move> solve(String heuristic) {
@@ -18,6 +20,8 @@ public class Fringe {
             System.out.println("Invalid heuristic.");
             return new ArrayList<Move>(); // Empty list
         }
+
+        long start = System.currentTimeMillis();
 
         /* Salah satu karakteristik utama dari Fringe search
          * yaitu terdapat now dan later*/
@@ -49,6 +53,8 @@ public class Fringe {
                 nodesExplored++;
 
                 if (currentBoard.isSolved()) {
+                    long end = System.currentTimeMillis();
+                    timeElapsed = end - start;
                     return currentMoves;
                 }
 
@@ -95,6 +101,8 @@ public class Fringe {
             later.clear();
         }
 
+        long end = System.currentTimeMillis();
+        timeElapsed = end - start;
         return new ArrayList<>();
     }
 
@@ -119,5 +127,9 @@ public class Fringe {
 
     public int getNodesExplored() {
         return nodesExplored;
+    }
+
+    public long getTimeElapsed() {
+        return timeElapsed;
     }
 }

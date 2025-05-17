@@ -5,11 +5,13 @@ public class AStar {
     private Board initialBoard;
     private Set<String> visitedStates;
     private int nodesExplored;
+    private long timeElapsed;
     
     public AStar(Board board) {
         this.initialBoard = board;
         this.visitedStates = new HashSet<>();
         this.nodesExplored = 0;
+        this.timeElapsed = 0;
     }
 
     /* String heuristic: metode heuristic yang dipilih */
@@ -19,6 +21,8 @@ public class AStar {
             return new ArrayList<Move>(); // Empty list
         }
 
+        long start = System.currentTimeMillis();
+
         PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(s -> s.getFValue()));
         
         List<Move> initialMoves = new ArrayList<>();
@@ -27,7 +31,7 @@ public class AStar {
         if (heuristic.equals("blockingCars")) {
             initialHValue = State.calculateBlockingCarsHeuristic(initialBoard);
         } else { // Exit Distance Heuristic
-            initialHValue = State.calculateExitDistanceHeuristic(initialBoard); // Nanti ganti jadi heuristic ke-2
+            initialHValue = State.calculateExitDistanceHeuristic(initialBoard);
         }
 
         queue.add(new State(initialBoard.copy(), initialMoves, initialHValue));
@@ -40,6 +44,8 @@ public class AStar {
 
             nodesExplored++;
             if (currentBoard.isSolved()) {
+                long end = System.currentTimeMillis();
+                timeElapsed = end - start;
                 return currentMoves;
             }
             String stateString = State.getBoardStateString(currentBoard);
@@ -68,6 +74,8 @@ public class AStar {
                 }
             }
         }
+        long end = System.currentTimeMillis();
+        timeElapsed = end - start;
         
         return null;
     }
@@ -93,5 +101,9 @@ public class AStar {
 
     public int getNodesExplored() {
         return nodesExplored;
+    }
+
+    public long getTimeElapsed() {
+        return timeElapsed;
     }
 }
