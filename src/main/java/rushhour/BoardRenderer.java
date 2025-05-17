@@ -12,8 +12,7 @@ import rushhour.lib.*;
 import java.util.Map;
 
 public class BoardRenderer {
-    public static void drawBoard(Board boardObj, GridPane gridPane, 
-                            Map<Character, Rectangle> carRectangles, char currentlyMovingCar) {
+    public static void drawBoard(Board boardObj, GridPane gridPane, Map<Character, Rectangle> carRectangles, char currentlyMovingCar) {
         gridPane.getChildren().clear();
         carRectangles.clear();
         

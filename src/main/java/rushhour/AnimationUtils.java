@@ -17,31 +17,23 @@ public class AnimationUtils {
     public static ParallelTransition createMoveAnimation(Move move, Rectangle carRect, double duration) {
         ParallelTransition animations = new ParallelTransition();
         
-        // Store original color for restoration later
         Color originalColor = (Color) carRect.getFill();
         
-        // 1. Initial scale effect to draw attention
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(duration * 0.2), carRect);
         scaleUp.setToX(1.15);
         scaleUp.setToY(1.15);
         
-        // 2. Create color cycling effect (Minecraft-style)
         Timeline colorCycle = new Timeline();
         colorCycle.setCycleCount(Timeline.INDEFINITE);
         
-        // Create property to animate the color cycling
         DoubleProperty colorShift = new SimpleDoubleProperty(0);
         
-        // Listen to property changes and update the car color
         colorShift.addListener((obs, oldVal, newVal) -> {
-            // Get current progress (0.0 to 1.0)
             double progress = newVal.doubleValue();
             
-            // Create cycling rainbow effect by shifting hue
             double baseHue = originalColor.getHue();
             double shiftedHue = (baseHue + progress * 360) % 360;
             
-            // Create new color with increased saturation and brightness for more vibrant effect
             Color cycledColor = Color.hsb(
                 shiftedHue,
                 Math.min(1.0, originalColor.getSaturation() * 1.5), 
@@ -49,17 +41,14 @@ public class AnimationUtils {
                 originalColor.getOpacity()
             );
             
-            // Apply new color to car rectangle
             carRect.setFill(cycledColor);
         });
         
-        // Create keyframes to cycle through colors smoothly
         colorCycle.getKeyFrames().addAll(
             new KeyFrame(Duration.ZERO, new KeyValue(colorShift, 0.0)),
             new KeyFrame(Duration.millis(500), new KeyValue(colorShift, 1.0))
         );
         
-        // 3. Add glow effect that intensifies during movement
         Bloom bloom = new Bloom(0.4);
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(0.2);
@@ -84,7 +73,6 @@ public class AnimationUtils {
             })
         );
         
-        // Combine all animations
         animations.getChildren().addAll(
             scaleUp,
             scaleDown,

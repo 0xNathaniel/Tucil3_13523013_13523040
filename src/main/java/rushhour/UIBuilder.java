@@ -40,17 +40,7 @@ public class UIBuilder {
         return boardArea;
     }
     
-    public static VBox createControlPanel(
-            ComboBox<String> algoBox, 
-            ComboBox<String> heuristicBox,
-            Button loadButton,
-            Button solveButton,
-            Label nodesExplored,
-            Label timeElapsed,
-            Label statusLabel,
-            EventHandler<ActionEvent> onAlgoChanged,
-            EventHandler<ActionEvent> onLoadClicked,
-            EventHandler<ActionEvent> onSolveClicked) {
+    public static VBox createControlPanel(ComboBox<String> algoBox, ComboBox<String> heuristicBox,Button loadButton,Button solveButton,Label nodesExplored,Label timeElapsed,Label statusLabel,EventHandler<ActionEvent> onAlgoChanged,EventHandler<ActionEvent> onLoadClicked,EventHandler<ActionEvent> onSolveClicked) {
             
         VBox controlPanel = new VBox(10);
         controlPanel.setPadding(new Insets(15));
@@ -121,20 +111,7 @@ public class UIBuilder {
         return controlPanel;
     }
     
-    public static VBox createAnimationControls(
-            Button playButton,
-            Button pauseButton, 
-            Button stopButton,
-            Button slowDownButton,
-            Button speedUpButton,
-            Slider animationSpeedSlider,
-            Label speedLabel,
-            EventHandler<ActionEvent> onPlayClicked,
-            EventHandler<ActionEvent> onPauseClicked,
-            EventHandler<ActionEvent> onStopClicked,
-            EventHandler<ActionEvent> onSlowDownClicked,
-            EventHandler<ActionEvent> onSpeedUpClicked,
-            ChangeListener<Number> onSpeedChanged) {
+    public static VBox createAnimationControls(Button playButton,Button pauseButton, Button stopButton,Button slowDownButton,Button speedUpButton, Slider animationSpeedSlider,Label speedLabel,EventHandler<ActionEvent> onPlayClicked,EventHandler<ActionEvent> onPauseClicked,EventHandler<ActionEvent> onStopClicked,EventHandler<ActionEvent> onSlowDownClicked,EventHandler<ActionEvent> onSpeedUpClicked,ChangeListener<Number> onSpeedChanged) {
             
         VBox animationPanel = new VBox(15);
         animationPanel.setPadding(new Insets(15));
