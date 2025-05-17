@@ -19,6 +19,7 @@ import rushhour.lib.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -29,7 +30,7 @@ public class App extends Application {
     private Board board;
     private GridPane gridPane;
     private ComboBox<String> algoBox, heuristicBox;
-    private Button loadButton, solveButton;
+    private Button loadButton, solveButton, saveButton;
     private Label statusLabel;
     private Label nodesExplored;
     private Label timeElapsed;
@@ -67,6 +68,9 @@ public class App extends Application {
         heuristicBox = new ComboBox<>();
         loadButton = new Button("Load Puzzle");
         solveButton = new Button("Solve Puzzle");
+        saveButton = new Button("Save Solution");
+        saveButton.setDisable(true);
+        
         statusLabel = new Label("Select a puzzle file to begin!");
         nodesExplored = new Label("0");
         timeElapsed = new Label("0 ms");
@@ -93,11 +97,12 @@ public class App extends Application {
         HBox zoomControls = createZoomControls();
         
         VBox controlPanel = UIBuilder.createControlPanel(
-            algoBox, heuristicBox, loadButton, solveButton, 
+            algoBox, heuristicBox, loadButton, solveButton, saveButton,
             nodesExplored, timeElapsed, statusLabel, zoomControls,
             e -> handleAlgorithmChange(),
             e -> handleLoad(),
-            e -> handleSolve()
+            e -> handleSolve(),
+            e -> saveSolutionToFile()
         );
         mainContainer.setBottom(controlPanel);
         
@@ -140,6 +145,95 @@ public class App extends Application {
         stage.show();
     }
     
+    private void saveSolutionToFile() {
+        if (moves == null || moves.isEmpty()) {
+            statusLabel.setText("No solution to save.");
+            return;
+        }
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Solution");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Text Files", "*.txt")
+        );
+        fileChooser.setInitialFileName("rush_hour_solution.txt");
+        
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            try (PrintWriter writer = new PrintWriter(file)) {
+                writer.println("Rush Hour Puzzle Solution");
+                writer.println("-------------------------");
+                writer.println("Algorithm used: " + algoBox.getValue() + 
+                              (heuristicBox.isDisabled() ? "" : " with " + heuristicBox.getValue() + " heuristic"));
+                writer.println("Total moves: " + moves.size());
+                writer.println("Nodes explored: " + nodesExplored.getText());
+                writer.println("Time elapsed: " + timeElapsed.getText());
+                writer.println("-------------------------");
+                writer.println();
+                
+                writer.println("Initial board state:");
+                printBoardToWriter(board, writer);
+                writer.println();
+                
+                Board animBoard = board.copy();
+                for (int i = 0; i < moves.size(); i++) {
+                    Move move = moves.get(i);
+                    writer.println("Gerakan ke- " + (i+1) + ": " + formatMove(move));
+                    move.applyMove(animBoard, move);
+                    printBoardToWriter(animBoard, writer);
+                    writer.println();
+                }
+                
+                statusLabel.setText("Solution saved successfully to " + file.getName());
+            } catch (FileNotFoundException e) {
+                statusLabel.setText("Error saving solution: " + e.getMessage());
+            }
+        }
+    }
+    
+    private String formatMove(Move move) {
+        char carId = move.getCarId();
+        String direction = move.getDirection();
+        switch (direction) {
+            case "up":    direction = "atas"; break;
+            case "down":  direction = "bawah"; break;
+            case "left":  direction = "kiri"; break;
+            case "right": direction = "kanan"; break;
+        }
+        return "Car " + carId + "-" + direction;
+    }
+    
+    private void printBoardToWriter(Board board, PrintWriter writer) {
+        char[][] grid = board.getGrid();
+        int height = board.getHeight();
+        int width = board.getWidth();
+        
+        // Print top border
+        writer.print("+");
+        for (int x = 0; x < width; x++) {
+            writer.print("--");
+        }
+        writer.println("+");
+        
+        for (int y = 1; y <= height; y++) {
+            writer.print("|");
+            for (int x = 1; x <= width; x++) {
+                writer.print(grid[y][x] + " ");
+            }
+            writer.println("|");
+        }
+        
+        writer.print("+");
+        for (int x = 0; x < width; x++) {
+            writer.print("--");
+        }
+        writer.println("+");
+        
+        int doorX = board.getDoorX();
+        int doorY = board.getDoorY();
+        writer.println("Door at position: (" + doorX + ", " + doorY + ")");
+    }
+    
     private HBox createZoomControls() {
         HBox zoomControls = new HBox(10);
         zoomControls.getStyleClass().add("zoom-controls");
@@ -164,62 +258,62 @@ public class App extends Application {
     }
     
     private void setupZoomHandlers(StackPane boardContainer) {
-    boardContainer.setOnScroll(this::handleScroll);
-    
-    Scale scale = new Scale();
-    scale.setPivotX(225);
-    scale.setPivotY(225);
-    scale.setX(scaleFactor);
-    scale.setY(scaleFactor);
-    gridPane.getTransforms().add(scale);
-    
-    gridPane.setTranslateX(0);
-    gridPane.setTranslateY(0);
-    
-    boardContainer.setOnMousePressed(event -> {
-        boardContainer.setCursor(javafx.scene.Cursor.CLOSED_HAND);
-        boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
-        event.consume();
-    });
-    
-    boardContainer.setOnMouseDragged(event -> {
-        if (boardContainer.getUserData() instanceof Point2D) {
-            Point2D dragStart = (Point2D) boardContainer.getUserData();
-            double deltaX = event.getSceneX() - dragStart.getX();
-            double deltaY = event.getSceneY() - dragStart.getY();
-            
-            gridPane.setTranslateX(gridPane.getTranslateX() + deltaX);
-            gridPane.setTranslateY(gridPane.getTranslateY() + deltaY);
-            
-            boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
-            event.consume();
-        }
-    });
-    
-    boardContainer.setOnMouseReleased(event -> {
-        boardContainer.setCursor(javafx.scene.Cursor.DEFAULT);
-        enforceGridBounds();
-        event.consume();
-    });
-}
-
-    private void enforceGridBounds() {
-    double boardWidth = 450;
-    double boardHeight = 450;
-    double gridWidth = boardWidth * scaleFactor;
-    double gridHeight = boardHeight * scaleFactor;
-    
-    double maxX = (gridWidth - boardWidth) / 2;
-    double maxY = (gridHeight - boardHeight) / 2;
-    
-    if (scaleFactor > 1.0) {
-        gridPane.setTranslateX(Math.max(-maxX, Math.min(maxX, gridPane.getTranslateX())));
-        gridPane.setTranslateY(Math.max(-maxY, Math.min(maxY, gridPane.getTranslateY())));
-    } else {
+        boardContainer.setOnScroll(this::handleScroll);
+        
+        Scale scale = new Scale();
+        scale.setPivotX(225);
+        scale.setPivotY(225);
+        scale.setX(scaleFactor);
+        scale.setY(scaleFactor);
+        gridPane.getTransforms().add(scale);
+        
         gridPane.setTranslateX(0);
         gridPane.setTranslateY(0);
+        
+        boardContainer.setOnMousePressed(event -> {
+            boardContainer.setCursor(javafx.scene.Cursor.CLOSED_HAND);
+            boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
+            event.consume();
+        });
+        
+        boardContainer.setOnMouseDragged(event -> {
+            if (boardContainer.getUserData() instanceof Point2D) {
+                Point2D dragStart = (Point2D) boardContainer.getUserData();
+                double deltaX = event.getSceneX() - dragStart.getX();
+                double deltaY = event.getSceneY() - dragStart.getY();
+                
+                gridPane.setTranslateX(gridPane.getTranslateX() + deltaX);
+                gridPane.setTranslateY(gridPane.getTranslateY() + deltaY);
+                
+                boardContainer.setUserData(new Point2D(event.getSceneX(), event.getSceneY()));
+                event.consume();
+            }
+        });
+        
+        boardContainer.setOnMouseReleased(event -> {
+            boardContainer.setCursor(javafx.scene.Cursor.DEFAULT);
+            enforceGridBounds();
+            event.consume();
+        });
     }
-}
+
+    private void enforceGridBounds() {
+        double boardWidth = 450;
+        double boardHeight = 450;
+        double gridWidth = boardWidth * scaleFactor;
+        double gridHeight = boardHeight * scaleFactor;
+        
+        double maxX = (gridWidth - boardWidth) / 2;
+        double maxY = (gridHeight - boardHeight) / 2;
+        
+        if (scaleFactor > 1.0) {
+            gridPane.setTranslateX(Math.max(-maxX, Math.min(maxX, gridPane.getTranslateX())));
+            gridPane.setTranslateY(Math.max(-maxY, Math.min(maxY, gridPane.getTranslateY())));
+        } else {
+            gridPane.setTranslateX(0);
+            gridPane.setTranslateY(0);
+        }
+    }
 
     private void handleScroll(ScrollEvent event) {
         double delta = event.getDeltaY();
@@ -229,32 +323,32 @@ public class App extends Application {
     }
     
     private void zoom(double factor) {
-    double newScale = scaleFactor * factor;
-    
-    if (newScale >= minScale && newScale <= maxScale) {
-        scaleFactor = newScale;
+        double newScale = scaleFactor * factor;
         
+        if (newScale >= minScale && newScale <= maxScale) {
+            scaleFactor = newScale;
+            
+            Scale scale = (Scale) gridPane.getTransforms().get(0);
+            scale.setX(scaleFactor);
+            scale.setY(scaleFactor);
+            
+            enforceGridBounds();
+            
+            statusLabel.setText("Zoom: " + String.format("%.1f", scaleFactor * 100) + "%");
+        }
+    }
+    
+    private void resetZoom() {
+        scaleFactor = 1.0;
         Scale scale = (Scale) gridPane.getTransforms().get(0);
         scale.setX(scaleFactor);
         scale.setY(scaleFactor);
         
-        enforceGridBounds();
+        gridPane.setTranslateX(0);
+        gridPane.setTranslateY(0);
         
-        statusLabel.setText("Zoom: " + String.format("%.1f", scaleFactor * 100) + "%");
+        statusLabel.setText("Zoom reset to 100%");
     }
-}
-    
-   private void resetZoom() {
-    scaleFactor = 1.0;
-    Scale scale = (Scale) gridPane.getTransforms().get(0);
-    scale.setX(scaleFactor);
-    scale.setY(scaleFactor);
-    
-    gridPane.setTranslateX(0);
-    gridPane.setTranslateY(0);
-    
-    statusLabel.setText("Zoom reset to 100%");
-}
     
     private void handleAlgorithmChange() {
         String selected = algoBox.getValue();
@@ -348,6 +442,7 @@ public class App extends Application {
                     
                     if (moves == null || moves.isEmpty()) {
                         statusLabel.setText("No solution found after exploring " + finalNodes + " nodes.");
+                        saveButton.setDisable(true);
                     } else {
                         statusLabel.setText("Solution found with " + moves.size() + " moves!");
                         moveCountLabel.setText("Move: 0 / " + moves.size());
@@ -357,6 +452,7 @@ public class App extends Application {
                         animationSpeedSlider.setDisable(false);
                         slowDownButton.setDisable(false);
                         speedUpButton.setDisable(false);
+                        saveButton.setDisable(false);
                     }
                     
                     solveButton.setDisable(false);
@@ -494,6 +590,7 @@ public class App extends Application {
         animationSpeedSlider.setDisable(true);
         slowDownButton.setDisable(true);
         speedUpButton.setDisable(true);
+        saveButton.setDisable(true);
         
         animationSpeedSlider.setValue(DEFAULT_SPEED);
         updateSpeed(DEFAULT_SPEED);
