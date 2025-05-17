@@ -23,6 +23,8 @@ public class App extends Application {
     private ComboBox<String> algoBox, heuristicBox;
     private Button loadButton, solveButton;
     private Label statusLabel;
+    private Label nodesExplored;
+    private Label timeElapsed;
     private List<Move> moves;
 
     public static void main(String[] args) {
@@ -34,6 +36,9 @@ public class App extends Application {
         VBox root = new VBox(10);
         root.setPadding(new Insets(15));
 
+        HBox statsBox = new HBox(5);
+        statsBox.setPadding(new Insets(10));
+
         HBox optionsBox = new HBox(10);
         optionsBox.setPadding(new Insets(10));
 
@@ -41,6 +46,8 @@ public class App extends Application {
         solveButton = new Button("Solve Puzzle");
 
         Label topLabel = new Label("Rush Hour Puzzle Solver");
+        Label nodesExploredLabel = new Label("Nodes Explored: ");
+        Label timeElapsedLabel = new Label("Time Elapsed:");
 
         algoBox = new ComboBox<>();
         algoBox.getItems().addAll("UCS", "Greedy", "A*", "Fringe");
@@ -67,8 +74,12 @@ public class App extends Application {
         loadButton.setOnAction(e -> handleLoad());
         solveButton.setOnAction(e -> handleSolve());
 
+        nodesExplored = new Label("0 nodes");
+        timeElapsed = new Label("0 ms");
+
+        statsBox.getChildren().addAll(nodesExploredLabel, nodesExplored, timeElapsedLabel, timeElapsed);
         optionsBox.getChildren().addAll(loadButton, algoBox, heuristicBox, solveButton);
-        root.getChildren().addAll(topLabel, gridPane, statusLabel, optionsBox);
+        root.getChildren().addAll(topLabel, gridPane, statsBox, statusLabel, optionsBox);
 
         Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
@@ -137,6 +148,8 @@ public class App extends Application {
     private void handleSolve() {
         String algo = algoBox.getValue();
         String heuristic = heuristicBox.getValue();
+        int numNodesExplored = 0;
+        long timeElapsedMs = 0;
 
         if (algo == null || (algo.matches("A\\*|Greedy|Fringe") && heuristic == null)) {
             statusLabel.setText("Please select both algorithm and heuristic if required.");
@@ -145,16 +158,28 @@ public class App extends Application {
 
         switch (algo) {
             case "UCS":
-                moves = new UCS(board).solve();
+                UCS ucs = new UCS(board);
+                moves = ucs.solve();
+                numNodesExplored = ucs.getNodesExplored();
+                timeElapsedMs = ucs.getTimeElapsed();
                 break;
             case "A*":
-                moves = new AStar(board).solve(heuristic);
+                AStar aStar = new AStar(board);
+                moves = aStar.solve(heuristic);
+                numNodesExplored = aStar.getNodesExplored();
+                timeElapsedMs = aStar.getTimeElapsed();
                 break;
             case "Greedy":
-                moves = new Greedy(board).solve(heuristic);
+                Greedy greedy = new Greedy(board);
+                moves = greedy.solve(heuristic);
+                numNodesExplored = greedy.getNodesExplored();
+                timeElapsedMs = greedy.getTimeElapsed();
                 break;
             case "Fringe":
-                moves = new Fringe(board).solve(heuristic);
+                Fringe fringe = new Fringe(board);
+                moves = fringe.solve(heuristic);
+                numNodesExplored = fringe.getNodesExplored();
+                timeElapsedMs = fringe.getTimeElapsed();
                 break;
         }
 
@@ -162,6 +187,8 @@ public class App extends Application {
             statusLabel.setText("No solution found.");
         } else {
             statusLabel.setText("Solution found! Animating...");
+            nodesExplored.setText(String.valueOf(numNodesExplored) + " nodes");
+            timeElapsed.setText(String.valueOf(timeElapsedMs) + " ms");
             animateMoves();
         }
     }
@@ -169,10 +196,11 @@ public class App extends Application {
     private void animateMoves() {
         Timeline timeline = new Timeline();
         Board animBoard = board.copy();
+        double stepDurationSeconds = 0.2;
 
         for (int i = 0; i < moves.size(); i++) {
             final int index = i;
-            KeyFrame kf = new KeyFrame(Duration.seconds(i), e -> {
+            KeyFrame kf = new KeyFrame(Duration.seconds(i * stepDurationSeconds), e -> {
                 moves.get(index).applyMove(animBoard, moves.get(index));
                 drawBoard(animBoard);
             });

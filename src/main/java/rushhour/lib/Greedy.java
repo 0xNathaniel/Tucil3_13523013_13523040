@@ -5,11 +5,13 @@ public class Greedy {
     private Board initialBoard;
     private Set<String> visitedStates;
     private int nodesExplored;
+    private long timeElapsed;
     
     public Greedy(Board board) {
         this.initialBoard = board;
         this.visitedStates = new HashSet<>();
         this.nodesExplored = 0;
+        this.timeElapsed = 0;
     }
 
     /* String heuristic: metode heuristic yang dipilih */
@@ -18,6 +20,8 @@ public class Greedy {
             System.out.println("Invalid heuristic.");
             return new ArrayList<Move>();
         }
+        
+        long start = System.currentTimeMillis();
 
         PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(s -> s.getHValue()));
         
@@ -40,6 +44,8 @@ public class Greedy {
 
             nodesExplored++;
             if (currentBoard.isSolved()) {
+                long end = System.currentTimeMillis();
+                timeElapsed = end - start;
                 return currentMoves;
             }
             String stateString = State.getBoardStateString(currentBoard);
@@ -68,6 +74,8 @@ public class Greedy {
                 }
             }
         }
+        long end = System.currentTimeMillis();
+        timeElapsed = end - start;
         
         return null;
     }
@@ -93,5 +101,9 @@ public class Greedy {
 
     public int getNodesExplored() {
         return nodesExplored;
+    }
+
+    public long getTimeElapsed() {
+        return timeElapsed;
     }
 }
