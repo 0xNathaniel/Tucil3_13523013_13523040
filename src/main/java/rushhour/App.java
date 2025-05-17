@@ -1,32 +1,25 @@
 package rushhour;
 
 import javafx.application.Application;
-import javafx.stage.*;
-import javafx.scene.*;
+import javafx.animation.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.geometry.*;
-import javafx.animation.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.scene.effect.DropShadow;
 import javafx.util.Duration;
+
 import rushhour.lib.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
-
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.DropShadow;
-
-import java.util.HashMap;
 import java.util.Map;
-
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.ColorAdjust;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 public class App extends Application {
     private Map<Character, Rectangle> carRectangles = new HashMap<>();
@@ -60,352 +53,72 @@ public class App extends Application {
         BorderPane mainContainer = new BorderPane();
         mainContainer.getStyleClass().add("main-container");
         
-        HBox titleBox = createTitleArea();
+        // Initialize controls
+        gridPane = new GridPane();
+        algoBox = new ComboBox<>();
+        heuristicBox = new ComboBox<>();
+        loadButton = new Button("Load Puzzle");
+        solveButton = new Button("Solve Puzzle");
+        statusLabel = new Label("Select a puzzle file to begin!");
+        nodesExplored = new Label("0");
+        timeElapsed = new Label("0 ms");
+        playButton = new Button();
+        pauseButton = new Button();
+        stopButton = new Button();
+        speedUpButton = new Button();
+        slowDownButton = new Button();
+        animationSpeedSlider = new Slider(MIN_SPEED, MAX_SPEED, DEFAULT_SPEED);
+        speedLabel = new Label("Animation Speed: 1.0x");
+        moveCountLabel = new Label("Move: 0 / 0");
+        
+        // Build UI using the modular components
+        HBox titleBox = UIBuilder.createTitleArea();
         mainContainer.setTop(titleBox);
         
-        VBox boardArea = createBoardArea();
+        VBox boardArea = UIBuilder.createBoardArea(gridPane, moveCountLabel);
         mainContainer.setCenter(boardArea);
         
-        VBox controlPanel = createControlPanel();
+        VBox controlPanel = UIBuilder.createControlPanel(
+            algoBox, heuristicBox, loadButton, solveButton, 
+            nodesExplored, timeElapsed, statusLabel,
+            e -> handleAlgorithmChange(),
+            e -> handleLoad(),
+            e -> handleSolve()
+        );
         mainContainer.setBottom(controlPanel);
         
-        VBox animationControls = createAnimationControls();
+        VBox animationControls = UIBuilder.createAnimationControls(
+            playButton, pauseButton, stopButton,
+            slowDownButton, speedUpButton, animationSpeedSlider, speedLabel,
+            e -> playAnimation(),
+            e -> pauseAnimation(),
+            e -> stopAnimation(),
+            e -> changeSpeed(-0.1),
+            e -> changeSpeed(0.1),
+            (obs, oldVal, newVal) -> updateSpeed(newVal.doubleValue())
+        );
         mainContainer.setRight(animationControls);
         
         Scene scene = new Scene(mainContainer, 750, 600);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        
+        // Initialize board
+        board = new Board(6, 6);
+        BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
         
         stage.setScene(scene);
         stage.setTitle("Rush Hour Puzzle Solver");
         stage.show();
     }
     
-    private HBox createTitleArea() {
-        HBox titleBox = new HBox();
-        titleBox.setAlignment(Pos.CENTER);
-        titleBox.setPadding(new Insets(15));
-        titleBox.getStyleClass().add("title-box");
-        
-        Label titleLabel = new Label("Rush Hour Puzzle Solver");
-        titleLabel.getStyleClass().add("title-label");
-        
-        titleBox.getChildren().add(titleLabel);
-        return titleBox;
-    }
-    
-    private VBox createBoardArea() {
-        VBox boardArea = new VBox(15);
-        boardArea.setAlignment(Pos.CENTER);
-        boardArea.setPadding(new Insets(10));
-        boardArea.getStyleClass().add("board-area");
-        
-        gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.getStyleClass().add("grid-pane");
-        
-        moveCountLabel = new Label("Move: 0 / 0");
-        moveCountLabel.getStyleClass().add("status-label");
-        
-        boardArea.getChildren().addAll(gridPane, moveCountLabel);
-        
-        drawBoard(new Board(6, 6));
-        
-        return boardArea;
-    }
-    
-    private VBox createControlPanel() {
-        VBox controlPanel = new VBox(10);
-        controlPanel.setPadding(new Insets(15));
-        controlPanel.setAlignment(Pos.CENTER);
-        controlPanel.getStyleClass().add("control-panel");
-        
-        HBox algoBox = new HBox(10);
-        algoBox.setAlignment(Pos.CENTER);
-        
-        Label algoLabel = new Label("Algorithm:");
-        algoLabel.getStyleClass().add("control-label");
-        
-        this.algoBox = new ComboBox<>();
-        this.algoBox.getItems().addAll("UCS", "Greedy", "A*", "Fringe");
-        this.algoBox.setPromptText("Select Algorithm");
-        this.algoBox.getStyleClass().add("combo-box");
-        
-        Label heuristicLabel = new Label("Heuristic:");
-        heuristicLabel.getStyleClass().add("control-label");
-        
-        heuristicBox = new ComboBox<>();
-        heuristicBox.getItems().addAll("blockingCars", "exitDistance");
-        heuristicBox.setPromptText("Select Heuristic");
-        heuristicBox.getStyleClass().add("combo-box");
-        
-        algoBox.getChildren().addAll(algoLabel, this.algoBox, heuristicLabel, heuristicBox);
-        
-        HBox buttonBox = new HBox(15);
-        buttonBox.setAlignment(Pos.CENTER);
-        
-        loadButton = new Button("Load Puzzle");
-        loadButton.getStyleClass().add("action-button");
-        loadButton.setGraphic(createIcon("📂", 16));
-        
-        solveButton = new Button("Solve Puzzle");
-        solveButton.getStyleClass().add("action-button");
-        solveButton.setGraphic(createIcon("🔍", 16));
-        solveButton.setDisable(true);
-        
-        buttonBox.getChildren().addAll(loadButton, solveButton);
-        
-        HBox statsBox = new HBox(20);
-        statsBox.setAlignment(Pos.CENTER);
-        
-        VBox nodesBox = new VBox(5);
-        nodesBox.setAlignment(Pos.CENTER);
-        Label nodesLabel = new Label("Nodes Explored:");
-        nodesLabel.getStyleClass().add("stats-label");
-        nodesExplored = new Label("0");
-        nodesExplored.getStyleClass().add("stats-value");
-        nodesBox.getChildren().addAll(nodesLabel, nodesExplored);
-        
-        VBox timeBox = new VBox(5);
-        timeBox.setAlignment(Pos.CENTER);
-        Label timeLabel = new Label("Time Elapsed:");
-        timeLabel.getStyleClass().add("stats-label");
-        timeElapsed = new Label("0 ms");
-        timeElapsed.getStyleClass().add("stats-value");
-        timeBox.getChildren().addAll(timeLabel, timeElapsed);
-        
-        statsBox.getChildren().addAll(nodesBox, timeBox);
-        
-        statusLabel = new Label("Select a puzzle file to begin!");
-        statusLabel.getStyleClass().add("status-label");
-        
-        this.algoBox.setOnAction(e -> {
-            String selected = this.algoBox.getValue();
-            if ("UCS".equals(selected)) {
-                heuristicBox.setDisable(true);
-                heuristicBox.setValue(null);
-            } else {
-                heuristicBox.setDisable(false);
-            }
-        });
-        
-        loadButton.setOnAction(e -> handleLoad());
-        solveButton.setOnAction(e -> handleSolve());
-        
-        controlPanel.getChildren().addAll(algoBox, buttonBox, statsBox, statusLabel);
-        return controlPanel;
-    }
-    
-    private VBox createAnimationControls() {
-        VBox animationPanel = new VBox(15);
-        animationPanel.setPadding(new Insets(15));
-        animationPanel.setAlignment(Pos.CENTER);
-        animationPanel.getStyleClass().add("animation-panel");
-        
-        Label controlLabel = new Label("Animation Controls");
-        controlLabel.getStyleClass().add("section-label");
-        
-        HBox transportControls = new HBox(10);
-        transportControls.setAlignment(Pos.CENTER);
-        
-        playButton = new Button();
-        playButton.setGraphic(createIcon("▶", 16));
-        playButton.getStyleClass().add("transport-button");
-        playButton.setDisable(true);
-        
-        pauseButton = new Button();
-        pauseButton.setGraphic(createIcon("⏸", 16));
-        pauseButton.getStyleClass().add("transport-button");
-        pauseButton.setDisable(true);
-        
-        stopButton = new Button();
-        stopButton.setGraphic(createIcon("⏹", 16));
-        stopButton.getStyleClass().add("transport-button");
-        stopButton.setDisable(true);
-        
-        transportControls.getChildren().addAll(playButton, pauseButton, stopButton);
-        
-        VBox speedControls = new VBox(10);
-        speedControls.setAlignment(Pos.CENTER);
-        
-        speedLabel = new Label("Animation Speed: 1.0x");
-        speedLabel.getStyleClass().add("control-label");
-        
-        HBox speedButtons = new HBox(10);
-        speedButtons.setAlignment(Pos.CENTER);
-        
-        slowDownButton = new Button();
-        slowDownButton.setGraphic(createIcon("🐢", 16));
-        slowDownButton.getStyleClass().add("speed-button");
-        slowDownButton.setDisable(true);
-        
-        speedUpButton = new Button();
-        speedUpButton.setGraphic(createIcon("🐇", 16));
-        speedUpButton.getStyleClass().add("speed-button");
-        speedUpButton.setDisable(true);
-        
-        speedButtons.getChildren().addAll(slowDownButton, speedUpButton);
-        
-        animationSpeedSlider = new Slider(MIN_SPEED, MAX_SPEED, DEFAULT_SPEED);
-        animationSpeedSlider.setShowTickMarks(true);
-        animationSpeedSlider.setShowTickLabels(true);
-        animationSpeedSlider.setMajorTickUnit(0.5);
-        animationSpeedSlider.setBlockIncrement(0.1);
-        animationSpeedSlider.setDisable(true);
-        
-        speedControls.getChildren().addAll(speedLabel, speedButtons, animationSpeedSlider);
-        
-        playButton.setOnAction(e -> playAnimation());
-        pauseButton.setOnAction(e -> pauseAnimation());
-        stopButton.setOnAction(e -> stopAnimation());
-        slowDownButton.setOnAction(e -> changeSpeed(-0.1));
-        speedUpButton.setOnAction(e -> changeSpeed(0.1));
-        
-        animationSpeedSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            updateSpeed(newVal.doubleValue());
-        });
-        
-        animationPanel.getChildren().addAll(controlLabel, transportControls, speedControls);
-        return animationPanel;
-    }
-    
-    private Label createIcon(String text, int size) {
-        Label icon = new Label(text);
-        icon.setStyle("-fx-font-size: " + size + "px;");
-        return icon;
-    }
-
-    private void drawBoard(Board boardObj) {
-        gridPane.getChildren().clear();
-        carRectangles.clear();
-        
-        gridPane.setHgap(0);
-        gridPane.setVgap(0);
-        gridPane.setPadding(new Insets(2));
-        
-        int width = boardObj.getWidth();
-        int height = boardObj.getHeight();
-        char[][] gridData = boardObj.getGrid();
-
-        for (int y = 1; y < height + 1; y++) {
-            for (int x = 1; x < width + 1; x++) {
-                char cellChar = gridData[y][x];
-                StackPane cell = new StackPane();
-                Rectangle rect = new Rectangle(40, 40);
-                rect.setStroke(Color.DARKGRAY);
-                rect.setStrokeWidth(1);
-                rect.setArcHeight(8);
-                rect.setArcWidth(8);
-
-                Label label = new Label(String.valueOf(cellChar));
-                label.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
-
-                boolean isMovingCar = cellChar == currentlyMovingCar;
-
-                if (cellChar == '.') {
-                    rect.setFill(Color.rgb(50, 50, 50, 0.2));
-                    label.setText("");
-                } else if (cellChar == 'P') {
-                    Color carColor = isMovingCar ? 
-                        Color.rgb(255, 60, 60, 0.9) : 
-                        Color.rgb(220, 50, 50, 0.8);
-                    rect.setFill(carColor);
-                    label.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 14px;");
-                    carRectangles.put(cellChar, rect);
-                    
-                    if (isMovingCar) {
-                        addHighlightEffect(rect);
-                    }
-                } else if (cellChar == 'K') {
-                    Color carColor = isMovingCar ? 
-                        Color.rgb(60, 255, 60, 0.9) : 
-                        Color.rgb(50, 200, 50, 0.8);
-                    rect.setFill(carColor);
-                    label.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 14px;");
-                    carRectangles.put(cellChar, rect);
-                    
-                    if (isMovingCar) {
-                        addHighlightEffect(rect);
-                    }
-                } else if (cellChar != '.') {
-                    double hue = ((cellChar - 'A') * 30) % 360;
-                    if (Math.abs(hue - 0) < 20 || Math.abs(hue - 360) < 20) {
-                        hue += 40;
-                    }
-                    
-                    double saturation = isMovingCar ? 0.9 : 0.7;
-                    double brightness = isMovingCar ? 0.95 : 0.85;
-                    double opacity = isMovingCar ? 0.95 : 0.8;
-                    
-                    Color pieceColor = Color.hsb(hue, saturation, brightness, opacity);
-                    rect.setFill(pieceColor);
-                    
-                    if (isMovingCar) {
-                        addHighlightEffect(rect);
-                    }
-                    
-                    if (!carRectangles.containsKey(cellChar)) {
-                        carRectangles.put(cellChar, rect);
-                    }
-                }
-
-                cell.getChildren().addAll(rect, label);
-                cell.getStyleClass().add("board-cell");
-                
-                if (!isMovingCar) {
-                    rect.setEffect(new javafx.scene.effect.DropShadow(4, 1, 1, Color.rgb(0, 0, 0, 0.3)));
-                }
-                
-                cell.setUserData(String.valueOf(cellChar));
-                
-                gridPane.add(cell, x, y);
-            }
+    private void handleAlgorithmChange() {
+        String selected = algoBox.getValue();
+        if ("UCS".equals(selected)) {
+            heuristicBox.setDisable(true);
+            heuristicBox.setValue(null);
+        } else {
+            heuristicBox.setDisable(false);
         }
-
-        int doorX = boardObj.getDoorX();
-        int doorY = boardObj.getDoorY();
-        
-        if (doorX >= 0 && doorX <= width && doorY >= 0 && doorY <= height) {
-            Rectangle doorMarker = new Rectangle(12, 12);
-            doorMarker.setFill(Color.LIGHTGREEN);
-            doorMarker.setStroke(Color.GREEN);
-            doorMarker.setStrokeWidth(2);
-            doorMarker.setArcHeight(6);
-            doorMarker.setArcWidth(6);
-            StackPane doorCell = new StackPane(doorMarker);
-            doorCell.getStyleClass().add("door-marker");
-            
-            if (doorX == width) { 
-                gridPane.add(doorCell, doorX, doorY + 1);
-            } else if (doorY == height) {
-                gridPane.add(doorCell, doorX + 1, doorY);
-            }
-        }
-    }
-    
-    private void addHighlightEffect(Rectangle rect) {
-        Glow glow = new Glow(0.8);
-        DropShadow highlight = new DropShadow(12, Color.WHITE);
-        highlight.setInput(glow);
-        rect.setEffect(highlight);
-        
-        Timeline pulse = new Timeline(
-            new KeyFrame(Duration.ZERO, 
-                new KeyValue(rect.scaleXProperty(), 1.0),
-                new KeyValue(rect.scaleYProperty(), 1.0)
-            ),
-            new KeyFrame(Duration.millis(500), 
-                new KeyValue(rect.scaleXProperty(), 1.10),
-                new KeyValue(rect.scaleYProperty(), 1.10)
-            ),
-            new KeyFrame(Duration.millis(1000), 
-                new KeyValue(rect.scaleXProperty(), 1.0),
-                new KeyValue(rect.scaleYProperty(), 1.0)
-            )
-        );
-        pulse.setCycleCount(Animation.INDEFINITE);
-        pulse.play();
-        
-        rect.setUserData(pulse);
     }
 
     private void handleLoad() {
@@ -418,7 +131,7 @@ public class App extends Application {
             try {
                 board = Load.loadGame(selectedFile);
                 currentlyMovingCar = '.'; 
-                drawBoard(board);
+                BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
                 statusLabel.setText("Puzzle loaded successfully from " + selectedFile.getName());
                 solveButton.setDisable(false);
                 
@@ -531,7 +244,7 @@ public class App extends Application {
         }
         
         currentlyMovingCar = '.';
-        drawBoard(animBoard);
+        BoardRenderer.drawBoard(animBoard, gridPane, carRectangles, currentlyMovingCar);
         
         playButton.setDisable(true);
         pauseButton.setDisable(false);
@@ -548,28 +261,29 @@ public class App extends Application {
             PauseTransition preMovePause = new PauseTransition(Duration.millis(50));
             preMovePause.setOnFinished(e -> {
                 currentlyMovingCar = move.getCarId();
-                drawBoard(animBoard);
+                BoardRenderer.drawBoard(animBoard, gridPane, carRectangles, currentlyMovingCar);
             });
             
             Rectangle carRect = carRectangles.get(move.getCarId());
             if (carRect == null) continue;
             
-            ParallelTransition moveAnimation = createMoveAnimation(move, carRect, baseDuration);
+            ParallelTransition moveAnimation = AnimationUtils.createMoveAnimation(move, carRect, baseDuration);
             
             PauseTransition postMovePause = new PauseTransition(Duration.millis(50));
             postMovePause.setOnFinished(e -> {
                 move.applyMove(animBoard, move);
                 currentlyMovingCar = '.';
-                drawBoard(animBoard);
+                BoardRenderer.drawBoard(animBoard, gridPane, carRectangles, currentlyMovingCar);
                 
                 currentMoveIndex = moveIndex + 1;
                 moveCountLabel.setText("Move: " + currentMoveIndex + " / " + moves.size());
                 
                 if (moveIndex == moves.size() - 1) {
-                    addCelebrationEffect(animBoard);
-                    playButton.setDisable(true);
+                    Rectangle mainCar = carRectangles.get('P');
+                    ParallelTransition celebration = AnimationUtils.createCelebrationEffect(mainCar);
+                    celebration.play();                    playButton.setDisable(true);
                     pauseButton.setDisable(true);
-                    statusLabel.setText("Animation complete - Solution required " + moves.size() + " moves!");
+                    statusLabel.setText("🎉 Puzzle solved! The car has escaped! 🎉");
                 }
             });
             
@@ -585,158 +299,27 @@ public class App extends Application {
         sequentialAnimation.play();
     }
 
-    private ParallelTransition createMoveAnimation(Move move, Rectangle carRect, double duration) {
-        ParallelTransition animations = new ParallelTransition();
-        
-        Color originalColor = (Color) carRect.getFill();
-        
-        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(duration * 0.2), carRect);
-        scaleUp.setToX(1.15);
-        scaleUp.setToY(1.15);
-        
-        Timeline colorCycle = new Timeline();
-        colorCycle.setCycleCount(1);
-        
-        DoubleProperty colorShift = new SimpleDoubleProperty(0);
-        
-        colorShift.addListener((obs, oldVal, newVal) -> {
-            double progress = newVal.doubleValue();
-            
-            double baseHue = originalColor.getHue();
-            double shiftedHue = (baseHue + progress * 360) % 360;
-            
-            Color cycledColor = Color.hsb(
-                shiftedHue,
-                Math.min(1.0, originalColor.getSaturation() * 1.5), 
-                Math.min(1.0, originalColor.getBrightness() * 1.2),
-                originalColor.getOpacity()
-            );
-            
-            carRect.setFill(cycledColor);
-        });
-        
-        colorCycle.getKeyFrames().addAll(
-            new KeyFrame(Duration.ZERO, new KeyValue(colorShift, 0.0)),
-            new KeyFrame(Duration.millis(duration * 0.1), new KeyValue(colorShift, 0.1)),
-            new KeyFrame(Duration.millis(duration * 0.2), new KeyValue(colorShift, 0.2)),
-            new KeyFrame(Duration.millis(duration * 0.3), new KeyValue(colorShift, 0.3)),
-            new KeyFrame(Duration.millis(duration * 0.4), new KeyValue(colorShift, 0.4)),
-            new KeyFrame(Duration.millis(duration * 0.5), new KeyValue(colorShift, 0.5)),
-            new KeyFrame(Duration.millis(duration * 0.6), new KeyValue(colorShift, 0.6)),
-            new KeyFrame(Duration.millis(duration * 0.7), new KeyValue(colorShift, 0.7)),
-            new KeyFrame(Duration.millis(duration * 0.8), new KeyValue(colorShift, 0.8))
-        );
-        
-        Bloom bloom = new Bloom(0.4);
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness(0.2);
-        colorAdjust.setContrast(0.2);
-        colorAdjust.setSaturation(0.5);
-        bloom.setInput(colorAdjust);
-        
-        carRect.setEffect(bloom);
-        
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(duration * 0.2), carRect);
-        scaleDown.setDelay(Duration.millis(duration * 0.8));
-        scaleDown.setToX(1.0);
-        scaleDown.setToY(1.0);
-        
-        Timeline resetAppearance = new Timeline(
-            new KeyFrame(Duration.millis(duration), e -> {
-                carRect.setFill(originalColor);
-                carRect.setEffect(new DropShadow(4, 1, 1, Color.rgb(0, 0, 0, 0.3)));
-            })
-        );
-        
-        animations.getChildren().addAll(
-            scaleUp,
-            colorCycle,
-            scaleDown,
-            resetAppearance
-        );
-        
-        return animations;
+    private void pauseAnimation() {
+        if (sequentialAnimation != null) {
+            sequentialAnimation.pause();
+            playButton.setDisable(false);
+            pauseButton.setDisable(true);
+            statusLabel.setText("Animation paused at move " + currentMoveIndex);
+        }
     }
 
-    private void addCelebrationEffect(Board animBoard) {
-        Rectangle mainCar = carRectangles.get('P');
-        if (mainCar == null) return;
+    private void stopAnimation() {
+        cleanupAnimationResources();
         
-        Color originalColor = (Color) mainCar.getFill();
+        BoardRenderer.drawBoard(board, gridPane, carRectangles, '.');
+        currentMoveIndex = 0;
+        moveCountLabel.setText("Move: 0 / " + (moves != null ? moves.size() : 0));
         
-        ParallelTransition celebration = new ParallelTransition();
-        
-        Timeline rainbow = new Timeline();
-        rainbow.setCycleCount(6);
-        
-        DoubleProperty hueShift = new SimpleDoubleProperty(0);
-        
-        hueShift.addListener((obs, oldVal, newVal) -> {
-            double hue = (newVal.doubleValue() * 360) % 360;
-            Color newColor = Color.hsb(hue, 0.9, 0.9);
-            mainCar.setFill(newColor);
-        });
-        
-        rainbow.getKeyFrames().addAll(
-            new KeyFrame(Duration.ZERO, new KeyValue(hueShift, 0.0)),
-            new KeyFrame(Duration.millis(500), new KeyValue(hueShift, 1.0))
-        );
-        
-        ScaleTransition pulse = new ScaleTransition(Duration.millis(250), mainCar);
-        pulse.setFromX(1.0);
-        pulse.setFromY(1.0);
-        pulse.setToX(1.2);
-        pulse.setToY(1.2);
-        pulse.setCycleCount(12);
-        pulse.setAutoReverse(true);
-        
-        Bloom bloom = new Bloom(0.7);
-        DropShadow gold = new DropShadow(20, Color.GOLD);
-        gold.setInput(bloom);
-        mainCar.setEffect(gold);
-        
-        celebration.getChildren().addAll(rainbow, pulse);
-        
-        celebration.setOnFinished(e -> {
-            mainCar.setFill(originalColor);
-            mainCar.setEffect(new DropShadow(4, 1, 1, Color.rgb(0, 0, 0, 0.3)));
-            mainCar.setScaleX(1.0);
-            mainCar.setScaleY(1.0);
-        });
-        
-        celebration.play();
-        
-        statusLabel.setText("🎉 Puzzle solved! The car has escaped! 🎉");
-    }
-    private void pauseAnimation() {
-    if (timeline != null) {
-        timeline.pause();
         playButton.setDisable(false);
         pauseButton.setDisable(true);
-        statusLabel.setText("Animation paused at move " + currentMoveIndex);
+        
+        statusLabel.setText("Animation reset. Ready to play solution.");
     }
-}
-
-private void stopAnimation() {
-    if (timeline != null) {
-        timeline.stop();
-    }
-    
-    drawBoard(board);
-    currentMoveIndex = 0;
-    moveCountLabel.setText("Move: 0 / " + (moves != null ? moves.size() : 0));
-    
-    playButton.setDisable(false);
-    pauseButton.setDisable(true);
-    
-    statusLabel.setText("Animation reset. Ready to play solution.");
-    
-    for (Rectangle rect : carRectangles.values()) {
-        rect.setEffect(new DropShadow(4, 1, 1, Color.rgb(0, 0, 0, 0.3)));
-        rect.setScaleX(1.0);
-        rect.setScaleY(1.0);
-    }
-}
     
     private void changeSpeed(double delta) {
         double currentSpeed = animationSpeedSlider.getValue();
@@ -748,7 +331,7 @@ private void stopAnimation() {
     private void updateSpeed(double speed) {
         speedLabel.setText(String.format("Animation Speed: %.1fx", speed));
         
-        if (timeline != null && timeline.getStatus() == Animation.Status.RUNNING) {
+        if (sequentialAnimation != null && sequentialAnimation.getStatus() == Animation.Status.RUNNING) {
             int currentMove = currentMoveIndex;
             stopAnimation();
             currentMoveIndex = currentMove;
@@ -757,10 +340,7 @@ private void stopAnimation() {
     }
     
     private void resetAnimationControls() {
-        if (timeline != null) {
-            timeline.stop();
-            timeline = null;
-        }
+        cleanupAnimationResources();
         
         playButton.setDisable(true);
         pauseButton.setDisable(true);
@@ -786,12 +366,6 @@ private void stopAnimation() {
         }
         
         for (Rectangle rect : carRectangles.values()) {
-            if (rect.getUserData() instanceof Timeline) {
-                ((Timeline) rect.getUserData()).stop();
-            }
-            rect.setEffect(new DropShadow(4, 1, 1, Color.rgb(0, 0, 0, 0.3)));
-            rect.setScaleX(1.0);
-            rect.setScaleY(1.0);
-        }
+            AnimationUtils.resetRectangleAppearance(rect, (Color)rect.getFill());        }
     }
 }
