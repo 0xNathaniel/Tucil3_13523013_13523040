@@ -1,16 +1,16 @@
 .root {
-  -fx-background-color: #2b2b2b;
-  -fx-font-family: 'Segoe UI', Arial, sans-serif;
+  -fx-background-color: #f5f5f5;
+  -fx-font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .main-container {
-  -fx-background-color: #2b2b2b;
+  -fx-background-color: #f5f5f5;
   -fx-padding: 10;
 }
 
 .title-box {
-  -fx-background-color: #1a1a1a;
-  -fx-border-color: #3c3c3c;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #e0e0e0;
   -fx-border-width: 0 0 1 0;
   -fx-padding: 10;
 }
@@ -18,21 +18,21 @@
 .title-label {
   -fx-font-size: 24px;
   -fx-font-weight: bold;
-  -fx-text-fill: #e0e0e0;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 1, 1);
+  -fx-text-fill: #333333;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 1, 1);
 }
 
 .board-area {
-  -fx-background-color: #333333;
-  -fx-border-color: #4d4d4d;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #e0e0e0;
   -fx-border-width: 1;
   -fx-border-radius: 5;
   -fx-padding: 15;
-  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
 }
 
 .grid-pane {
-  -fx-background-color: #444444;
+  -fx-background-color: #f0f0f0;
   -fx-padding: 10;
   -fx-grid-lines-visible: true;
   -fx-alignment: center;
@@ -47,15 +47,15 @@
 }
 
 .control-panel {
-  -fx-background-color: #333333;
-  -fx-border-color: #4d4d4d;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #e0e0e0;
   -fx-border-width: 1 0 0 0;
   -fx-padding: 15;
 }
 
 .animation-panel {
-  -fx-background-color: #333333;
-  -fx-border-color: #4d4d4d;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #e0e0e0;
   -fx-border-width: 0 0 0 1;
   -fx-padding: 15;
   -fx-min-width: 200;
@@ -64,29 +64,29 @@
 .section-label {
   -fx-font-size: 16px;
   -fx-font-weight: bold;
-  -fx-text-fill: #e0e0e0;
+  -fx-text-fill: #333333;
   -fx-padding: 0 0 10 0;
 }
 
 .control-label {
   -fx-font-size: 14px;
-  -fx-text-fill: #cccccc;
+  -fx-text-fill: #555555;
 }
 
 .stats-label {
   -fx-font-size: 12px;
-  -fx-text-fill: #bbbbbb;
+  -fx-text-fill: #666666;
 }
 
 .stats-value {
   -fx-font-size: 18px;
   -fx-font-weight: bold;
-  -fx-text-fill: #e0e0e0;
+  -fx-text-fill: #333333;
 }
 
 .status-label {
   -fx-font-size: 14px;
-  -fx-text-fill: #cccccc;
+  -fx-text-fill: #555555;
   -fx-padding: 10 0 10 0;
 }
 
@@ -108,13 +108,13 @@
 }
 
 .action-button:disabled {
-  -fx-background-color: #555555;
+  -fx-background-color: #cccccc;
   -fx-text-fill: #888888;
 }
 
 .transport-button {
-  -fx-background-color: #444444;
-  -fx-text-fill: white;
+  -fx-background-color: #e8e8e8;
+  -fx-text-fill: #333333;
   -fx-font-size: 16px;
   -fx-min-width: 40px;
   -fx-min-height: 40px;
@@ -123,21 +123,21 @@
 }
 
 .transport-button:hover {
-  -fx-background-color: #555555;
+  -fx-background-color: #d0d0d0;
 }
 
 .transport-button:pressed {
-  -fx-background-color: #333333;
+  -fx-background-color: #c0c0c0;
 }
 
 .transport-button:disabled {
-  -fx-background-color: #333333;
-  -fx-text-fill: #555555;
+  -fx-background-color: #f0f0f0;
+  -fx-text-fill: #aaaaaa;
 }
 
 .speed-button {
-  -fx-background-color: #444444;
-  -fx-text-fill: white;
+  -fx-background-color: #e8e8e8;
+  -fx-text-fill: #333333;
   -fx-min-width: 30px;
   -fx-min-height: 30px;
   -fx-background-radius: 15;
@@ -145,46 +145,46 @@
 }
 
 .speed-button:hover {
-  -fx-background-color: #555555;
+  -fx-background-color: #d0d0d0;
 }
 
 .speed-button:pressed {
-  -fx-background-color: #333333;
+  -fx-background-color: #c0c0c0;
 }
 
 .speed-button:disabled {
-  -fx-background-color: #333333;
-  -fx-text-fill: #555555;
+  -fx-background-color: #f0f0f0;
+  -fx-text-fill: #aaaaaa;
 }
 
 .combo-box {
-  -fx-background-color: #444444;
-  -fx-text-fill: white;
-  -fx-mark-color: white;
+  -fx-background-color: #f0f0f0;
+  -fx-text-fill: #333333;
+  -fx-mark-color: #333333;
 }
 
 .combo-box .list-cell {
-  -fx-text-fill: white;
-  -fx-background-color: #444444;
+  -fx-text-fill: #333333;
+  -fx-background-color: #f0f0f0;
 }
 
 .combo-box .list-view {
-  -fx-background-color: #333333;
-  -fx-border-color: #555555;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #e0e0e0;
 }
 
-.combo-box .list-view .list-cell:filled:selected, 
+.combo-box .list-view .list-cell:filled:selected,
 .combo-box .list-view .list-cell:filled:selected:hover {
   -fx-background-color: #3c6e71;
   -fx-text-fill: white;
 }
 
 .combo-box .list-view .list-cell:filled:hover {
-  -fx-background-color: #555555;
+  -fx-background-color: #e0e0e0;
 }
 
 .slider .track {
-  -fx-background-color: #555555;
+  -fx-background-color: #cccccc;
 }
 
 .slider .thumb {
@@ -196,66 +196,73 @@
 }
 
 .cell {
-  -fx-border-color: #555555;
+  -fx-border-color: #dddddd;
   -fx-border-width: 1;
-  -fx-background-color: #444444;
-  -fx-text-fill: white;
+  -fx-background-color: #f0f0f0;
+  -fx-text-fill: #333333;
   -fx-font-weight: bold;
   -fx-font-size: 16;
 }
 
 /* Animation styles */
 .moving-car {
-    -fx-transition: -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.2s;
+  -fx-transition: -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.2s;
 }
 
 .car-highlight {
-    -fx-effect: dropshadow(three-pass-box, gold, 10, 0.5, 0, 0) !important;
+  -fx-effect: dropshadow(three-pass-box, gold, 10, 0.5, 0, 0) !important;
 }
 
 /* Add more dynamic styling to UI elements */
 .action-button {
-    -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
+  -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
 }
 
 .action-button:hover {
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
 }
 
 .transport-button {
-    -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
+  -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
 }
 
 .transport-button:hover {
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+  -fx-scale-x: 1.1;
+  -fx-scale-y: 1.1;
 }
 
 .speed-button {
-    -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
+  -fx-transition: -fx-background-color 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
 }
 
 .speed-button:hover {
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+  -fx-scale-x: 1.1;
+  -fx-scale-y: 1.1;
 }
 
 @keyframes glow {
-    0% { -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 0); }
-    50% { -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.8), 20, 0, 0, 0); }
-    100% { -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 0); }
+  0% {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 0);
+  }
+  50% {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.8), 20, 0, 0, 0);
+  }
+  100% {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 0);
+  }
 }
 
 .celebrating-car {
-    -fx-animation: glow 0.5s infinite;
+  -fx-animation: glow 0.5s infinite;
 }
 
 .car-highlight {
-    -fx-effect: dropshadow(three-pass-box, gold, 15, 0.7, 0, 0) !important;
+  -fx-effect: dropshadow(three-pass-box, gold, 15, 0.7, 0, 0) !important;
 }
 
 /* Make sure all transitions are smooth */
-.board-cell, .rectangle {
-    -fx-transition: -fx-fill 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s;
+.board-cell,
+.rectangle {
+  -fx-transition: -fx-fill 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s;
 }
