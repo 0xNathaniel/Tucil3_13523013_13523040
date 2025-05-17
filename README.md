@@ -127,7 +127,7 @@ git clone https://github.com/0xNathaniel/Tucil3_13523013_13523040.git
 cd Tucil3_13523013_13523040
 ```
 
-2. Jalankan program dengan Maven:
+2. Jalankan program dengan Maven (harus dari root):
 
 ```bash
 mvn clean javafx:run
