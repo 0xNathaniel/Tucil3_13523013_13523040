@@ -84,7 +84,7 @@ public class UIBuilder {
         Label heuristicLabel = new Label("Heuristic:");
         heuristicLabel.getStyleClass().add("control-label");
         
-        heuristicBox.getItems().addAll("blockingCars", "exitDistance");
+        heuristicBox.getItems().addAll("blockingCars", "exitDistance", "blockingCarsAndExitDistance");
         heuristicBox.setPromptText("Select Heuristic");
         heuristicBox.getStyleClass().add("combo-box");
         
