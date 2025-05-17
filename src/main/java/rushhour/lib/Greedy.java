@@ -31,7 +31,7 @@ public class Greedy {
         if (heuristic.equals("blockingCars")) {
             initialHValue = State.calculateBlockingCarsHeuristic(initialBoard);
         } else {
-            initialHValue = State.calculateExitDistanceHeuristic(initialBoard); // Nanti ganti jadi heuristic ke-2
+            initialHValue = State.calculateExitDistanceHeuristic(initialBoard);
         }
 
         queue.add(new State(initialBoard.copy(), initialMoves, initialHValue));
