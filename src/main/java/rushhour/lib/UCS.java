@@ -5,6 +5,7 @@ public class UCS {
      private Board initialBoard;
      private Set<String> visitedStates;
      private int nodesExplored;
+     private long timeElapsed;
 
     /* Cukup memasukkan initialBoard state yang ingin di-solve
      * Gunakan solve() untuk memberikan solusi berdasarkan algo UCS */
@@ -12,12 +13,15 @@ public class UCS {
         this.initialBoard = board;
         this.visitedStates = new HashSet<>();
         this.nodesExplored = 0;
+        this.timeElapsed = 0;
     }
 
     public List<Move> solve() {
         PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(s -> s.getGValue()));
         List<Move> initialMoves = new ArrayList<>();
         queue.add(new State(initialBoard.copy(), initialMoves));
+
+        long start = System.currentTimeMillis();
 
         while (!queue.isEmpty()) {
             State stateNow = queue.poll();          
@@ -26,6 +30,8 @@ public class UCS {
 
             nodesExplored++;
             if (currentBoard.isSolved()) { // Goal state
+                long end = System.currentTimeMillis();
+                timeElapsed = end - start;
                 return currentMoves;
             }
 
@@ -50,6 +56,8 @@ public class UCS {
                 }
             }
         }
+        long end = System.currentTimeMillis();
+        timeElapsed = end - start;
         
         return null;
     }
@@ -78,4 +86,7 @@ public class UCS {
         return nodesExplored;
     }
 
+    public long getTimeElapsed() {
+        return timeElapsed;
+    }
 }   
