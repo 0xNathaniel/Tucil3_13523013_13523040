@@ -1,5 +1,6 @@
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\AStar.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\State.java
+C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\UIBuilder.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Greedy.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\TestAlgo.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Main.java
@@ -10,6 +11,8 @@ C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\TestLoad.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Board.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\TestRushHour.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Car.java
+C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\BoardRenderer.java
+C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\AnimationUtils.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Fringe.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\lib\Move.java
 C:\Users\kenne\Tucil3STIMA\src\main\java\rushhour\App.java
