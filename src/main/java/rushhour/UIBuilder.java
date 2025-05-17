@@ -26,43 +26,45 @@ public class UIBuilder {
     }
     
     public static VBox createBoardArea(StackPane boardContainer, Label moveCountLabel) {
-    VBox boardArea = new VBox(15);
-    boardArea.setAlignment(Pos.CENTER);
-    boardArea.setPadding(new Insets(10));
-    boardArea.getStyleClass().add("board-area");
-    
-    javafx.scene.shape.Rectangle clip = new javafx.scene.shape.Rectangle(450, 450);
-    clip.setArcWidth(10);
-    clip.setArcHeight(10);
-    boardContainer.setClip(clip);
-    
-    boardContainer.setMinSize(450, 450);
-    boardContainer.setMaxSize(450, 450);
-    boardContainer.setPrefSize(450, 450);
-    
-    boardContainer.getStyleClass().add("board-container");
-    
-    boardContainer.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #999; -fx-border-width: 2px; -fx-border-radius: 5px;");
-    
-    moveCountLabel.getStyleClass().add("status-label");
-    
-    boardArea.getChildren().addAll(boardContainer, moveCountLabel);
-    
-    return boardArea;
-}
+        VBox boardArea = new VBox(15);
+        boardArea.setAlignment(Pos.CENTER);
+        boardArea.setPadding(new Insets(10));
+        boardArea.getStyleClass().add("board-area");
+        
+        javafx.scene.shape.Rectangle clip = new javafx.scene.shape.Rectangle(450, 450);
+        clip.setArcWidth(10);
+        clip.setArcHeight(10);
+        boardContainer.setClip(clip);
+        
+        boardContainer.setMinSize(450, 450);
+        boardContainer.setMaxSize(450, 450);
+        boardContainer.setPrefSize(450, 450);
+        
+        boardContainer.getStyleClass().add("board-container");
+        
+        boardContainer.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #999; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        
+        moveCountLabel.getStyleClass().add("status-label");
+        
+        boardArea.getChildren().addAll(boardContainer, moveCountLabel);
+        
+        return boardArea;
+    }
     
     public static VBox createControlPanel(
             ComboBox<String> algoBox, 
             ComboBox<String> heuristicBox,
             Button loadButton,
             Button solveButton,
+            Button saveButton,
             Label nodesExplored,
             Label timeElapsed,
             Label statusLabel,
             HBox zoomControls,
             EventHandler<ActionEvent> onAlgoChanged,
             EventHandler<ActionEvent> onLoadClicked,
-            EventHandler<ActionEvent> onSolveClicked) {
+            EventHandler<ActionEvent> onSolveClicked,
+            EventHandler<ActionEvent> onSaveClicked) {
             
         VBox controlPanel = new VBox(10);
         controlPanel.setPadding(new Insets(15));
@@ -98,7 +100,11 @@ public class UIBuilder {
         solveButton.setGraphic(createIcon("🔍", 16));
         solveButton.setDisable(true);
         
-        buttonBox.getChildren().addAll(loadButton, solveButton);
+        saveButton.getStyleClass().add("action-button");
+        saveButton.setGraphic(createIcon("💾", 16));
+        saveButton.setDisable(true);
+        
+        buttonBox.getChildren().addAll(loadButton, solveButton, saveButton);
         
         HBox statsBox = new HBox(20);
         statsBox.setAlignment(Pos.CENTER);
@@ -128,6 +134,7 @@ public class UIBuilder {
         algoBox.setOnAction(onAlgoChanged);
         loadButton.setOnAction(onLoadClicked);
         solveButton.setOnAction(onSolveClicked);
+        saveButton.setOnAction(onSaveClicked);
         
         controlPanel.getChildren().addAll(algoHBox, buttonBox, statsBox, controlRow, statusLabel);
         return controlPanel;
