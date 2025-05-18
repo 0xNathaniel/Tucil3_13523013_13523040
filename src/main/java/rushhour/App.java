@@ -118,7 +118,7 @@ public class App extends Application {
         );
         mainContainer.setRight(animationControls);
         
-        Scene scene = new Scene(mainContainer, 900, 750);
+        Scene scene = new Scene(mainContainer, 900, 900);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         try {
