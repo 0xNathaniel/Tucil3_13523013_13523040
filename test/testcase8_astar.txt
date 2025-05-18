@@ -1,0 +1,74 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: A* with exitDistance heuristic
+Total moves: 5
+Nodes explored: 82
+Time elapsed: 1 ms
+-------------------------
+
+Initial board state:
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|. . X X X . |
+|. C C . B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 1: Car X-kiri
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|. X X X . . |
+|. C C . B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 2: Car X-kiri
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|X X X . . . |
+|. C C . B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 3: Car P-bawah
++------------+
+|. J . . E E |
+|. J . . . W |
+|. J . P . W |
+|X X X P . . |
+|. C C . B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 4: Car P-bawah
++------------+
+|. J . . E E |
+|. J . . . W |
+|. J . . . W |
+|X X X P . . |
+|. C C P B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 5: Car P-bawah
++------------+
+|. J . . E E |
+|. J . . . W |
+|. J . . . W |
+|X X X . . . |
+|. C C P B B |
+|A A A P D D |
++------------+
+Door at position: (3, 6)
+
