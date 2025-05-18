@@ -49,13 +49,16 @@ public class Load {
         List<String> allLines = new ArrayList<>();
         
         while (scanner.hasNextLine()) {
-            allLines.add(scanner.nextLine());
+            String line = scanner.nextLine();
+            System.out.println("Read line: [" + line + "]");
+            allLines.add(line);
         }
+        
+        System.out.println("Total lines read: " + allLines.size());
         
         if (!allLines.isEmpty()) {
             String firstLine = allLines.get(0);
             if (firstLine.trim().equals("K") || firstLine.matches("\\s*K\\s*")) {
-                // Door already found - return null if another door is found later
                 if (doorFound) {
                     System.out.println("Error: Multiple doors (K) found - only one door is allowed");
                     return null;
@@ -73,21 +76,28 @@ public class Load {
         List<String> gridLines = new ArrayList<>();
         for (int i = 0; i < Math.min(height, allLines.size()); i++) {
             String line = allLines.get(i);
-                if (!line.trim().isEmpty()) {
-                    gridLines.add(line);
-                }       
+            if (!line.trim().isEmpty()) {
+                gridLines.add(line);
+            }
+        }
+
+        System.out.println("Expected height: " + height);
+        System.out.println("Grid lines count: " + gridLines.size());
+        
+        for (int i = 0; i < gridLines.size(); i++) {
+            System.out.println("Grid line " + i + ": [" + gridLines.get(i) + "]");
         }
 
         if (gridLines.size() < height) {
-                System.out.println("Error: Not enough rows in the puzzle. Expected " + height + " rows but found only " + gridLines.size());
-                return null;
-         }
+            System.out.println("Error: Not enough rows in the puzzle. Expected " + height + 
+                              " rows but found only " + gridLines.size());
+            return null;
+        }
         
         for (int y = 0; y < gridLines.size(); y++) {
             String line = gridLines.get(y);
             
             if (line.length() > 0 && line.charAt(0) == 'K') {
-                // Door already found - return null if another door is found
                 if (doorFound) {
                     System.out.println("Error: Multiple doors (K) found - only one door is allowed");
                     return null;
@@ -101,7 +111,6 @@ public class Load {
             }
             
             if (line.length() > width && line.charAt(width) == 'K') {
-                // Door already found - return null if another door is found
                 if (doorFound) {
                     System.out.println("Error: Multiple doors (K) found - only one door is allowed");
                     return null;
@@ -119,7 +128,6 @@ public class Load {
                 if (cell == '.') continue;
                 
                 if (cell == 'K') {
-                    // Door already found - return null if another door is found
                     if (doorFound) {
                         System.out.println("Error: Multiple doors (K) found - only one door is allowed");
                         return null;
@@ -130,7 +138,11 @@ public class Load {
                     doorFound = true;
                     System.out.println("Door found inside grid at (" + doorX + "," + doorY + ")");
                 } else {
-                    // Add car position
+                    if (!Character.isLetter(cell)) {
+                        System.out.println("Error: Invalid car ID '" + cell + "'. Car IDs must be letters A-Z or a-z.");
+                        return null;
+                    }
+                    
                     carPositions.putIfAbsent(cell, new ArrayList<>());
                     carPositions.get(cell).add(new int[]{x, y});
                 }
@@ -141,7 +153,6 @@ public class Load {
         if (remainingLinesStart < allLines.size()) {
             String bottomLine = allLines.get(remainingLinesStart);
             if (bottomLine.trim().equals("K") || bottomLine.matches("\\s*K\\s*")) {
-                // Door already found - return null if another door is found
                 if (doorFound) {
                     System.out.println("Error: Multiple doors (K) found - only one door is allowed");
                     return null;
@@ -167,6 +178,62 @@ public class Load {
             return null;
         }
         
+        for (Map.Entry<Character, List<int[]>> entry : carPositions.entrySet()) {
+            char id = entry.getKey();
+            List<int[]> positions = entry.getValue();
+            
+            positions.sort((a, b) -> {
+                if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
+                return Integer.compare(a[0], b[0]); 
+            });
+            
+            boolean isHorizontal = true;
+            boolean isVertical = true;
+            
+            int firstY = positions.get(0)[1];
+            for (int[] pos : positions) {
+                if (pos[1] != firstY) {
+                    isHorizontal = false;
+                    break;
+                }
+            }
+            
+            int firstX = positions.get(0)[0];
+            for (int[] pos : positions) {
+                if (pos[0] != firstX) {
+                    isVertical = false;
+                    break;
+                }
+            }
+            
+            if (!isHorizontal && !isVertical) {
+                System.out.println("Error: Car '" + id + "' has an invalid shape. Cars must be straight lines (either horizontal or vertical).");
+                return null;
+            }
+            
+            if (isHorizontal) {
+                for (int i = 0; i < positions.size() - 1; i++) {
+                    int currentX = positions.get(i)[0];
+                    int nextX = positions.get(i + 1)[0];
+                    if (nextX - currentX != 1) {
+                        System.out.println("Error: Car '" + id + "' has non-contiguous positions. Cars must occupy adjacent cells.");
+                        return null;
+                    }
+                }
+            }
+            
+            if (isVertical) {
+                for (int i = 0; i < positions.size() - 1; i++) {
+                    int currentY = positions.get(i)[1];
+                    int nextY = positions.get(i + 1)[1];
+                    if (nextY - currentY != 1) {
+                        System.out.println("Error: Car '" + id + "' has non-contiguous positions. Cars must occupy adjacent cells.");
+                        return null;
+                    }
+                }
+            }
+        }
+        
         List<Car> cars = new ArrayList<>();
         for (Map.Entry<Character, List<int[]>> entry : carPositions.entrySet()) {
             char id = entry.getKey();
@@ -174,33 +241,26 @@ public class Load {
             
             boolean isPrimary = (id == 'P');
             
-            positions.sort((a, b) -> {
-                if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
-                return Integer.compare(a[0], b[0]); 
-            });
-            
             int x = positions.get(0)[0];
             int y = positions.get(0)[1];
             int length = positions.size();
             
-            boolean isHorizontal;
-            if (positions.size() > 1) {
-                int sameY = 0;
-                for (int i = 1; i < positions.size(); i++) {
-                    if (positions.get(i)[1] == positions.get(0)[1]) sameY++;
+            boolean isHorizontal = true;
+            int firstY = positions.get(0)[1];
+            for (int[] pos : positions) {
+                if (pos[1] != firstY) {
+                    isHorizontal = false;
+                    break;
                 }
-                isHorizontal = (sameY == positions.size() - 1);
-            } else {
-                isHorizontal = true;
             }
             
             Car car = new Car(id, x, y, length, isHorizontal, isPrimary);
             cars.add(car);
-            System.out.println("Added car " + id + " at (" + x + "," + y + "), length=" + length + ", horizontal=" + isHorizontal + ", primary=" + isPrimary);
+            System.out.println("Added car " + id + " at (" + x + "," + y + "), length=" + length + 
+                              ", horizontal=" + isHorizontal + ", primary=" + isPrimary);
         }
         
-        // Validate car count (excluding primary car)
-        int actualCarCount = cars.size() - 1; // Don't count primary car
+        int actualCarCount = cars.size() - 1;
         if (actualCarCount < declaredPieceCount) {
             System.out.println("Error: Jumlah mobil dalam file (" + actualCarCount + 
                     ") kurang dari yang dideklarasikan (" + declaredPieceCount + ")");
@@ -229,9 +289,7 @@ public class Load {
                     }
                 }
             } else {
-                // For vertical primary car, door should be in the same column
                 if (doorX == primaryCar.getX()) {
-                    // Door should be above or below the car
                     if ((doorY == -1) || (doorY == height) || 
                         (doorY >= primaryCar.getY() + primaryCar.getLength()) || 
                         (doorY < primaryCar.getY())) {
@@ -276,7 +334,6 @@ public class Load {
     }
 }
 
-// Helper extension for String
 class StringExtensions {
     public static String lTrim(String str) {
         int i = 0;
