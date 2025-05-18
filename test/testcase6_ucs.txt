@@ -1,0 +1,217 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: UCS
+Total moves: 18
+Nodes explored: 116
+Time elapsed: 1 ms
+-------------------------
+
+Initial board state:
++------------+
+|A A B . C C |
+|D . B E E E |
+|D F P P H I |
+|J F O O H I |
+|J F R R R Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 1: Car F-atas
++------------+
+|A A B . C C |
+|D F B E E E |
+|D F P P H I |
+|J F O O H I |
+|J . R R R Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 2: Car R-kiri
++------------+
+|A A B . C C |
+|D F B E E E |
+|D F P P H I |
+|J F O O H I |
+|J R R R . Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 3: Car H-bawah
++------------+
+|A A B . C C |
+|D F B E E E |
+|D F P P . I |
+|J F O O H I |
+|J R R R H Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 4: Car P-kanan
++------------+
+|A A B . C C |
+|D F B E E E |
+|D F . P P I |
+|J F O O H I |
+|J R R R H Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 5: Car B-bawah
++------------+
+|A A . . C C |
+|D F B E E E |
+|D F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 6: Car A-kanan
++------------+
+|. A A . C C |
+|D F B E E E |
+|D F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 7: Car D-atas
++------------+
+|D A A . C C |
+|D F B E E E |
+|. F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|J X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 8: Car J-atas
++------------+
+|D A A . C C |
+|D F B E E E |
+|J F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|. X X V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 9: Car X-kiri
++------------+
+|D A A . C C |
+|D F B E E E |
+|J F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|X X . V V Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 10: Car V-kiri
++------------+
+|D A A . C C |
+|D F B E E E |
+|J F B P P I |
+|J F O O H I |
+|J R R R H Q |
+|X X V V . Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 11: Car H-bawah
++------------+
+|D A A . C C |
+|D F B E E E |
+|J F B P P I |
+|J F O O . I |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 12: Car O-kanan
++------------+
+|D A A . C C |
+|D F B E E E |
+|J F B P P I |
+|J F . O O I |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 13: Car B-bawah
++------------+
+|D A A . C C |
+|D F . E E E |
+|J F B P P I |
+|J F B O O I |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 14: Car E-kiri
++------------+
+|D A A . C C |
+|D F E E E . |
+|J F B P P I |
+|J F B O O I |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 15: Car I-atas
++------------+
+|D A A . C C |
+|D F E E E I |
+|J F B P P I |
+|J F B O O . |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 16: Car C-kiri
++------------+
+|D A A C C . |
+|D F E E E I |
+|J F B P P I |
+|J F B O O . |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 17: Car I-atas
++------------+
+|D A A C C I |
+|D F E E E I |
+|J F B P P . |
+|J F B O O . |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 18: Car P-kanan
++------------+
+|D A A C C I |
+|D F E E E I |
+|J F B . P P |
+|J F B O O . |
+|J R R R H Q |
+|X X V V H Q |
++------------+
+Door at position: (6, 2)
+

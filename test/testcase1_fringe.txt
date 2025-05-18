@@ -1,0 +1,118 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: Fringe with blockingCarsAndExitDistance heuristic
+Total moves: 9
+Nodes explored: 1592
+Time elapsed: 13 ms
+-------------------------
+
+Initial board state:
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 1: Car C-atas
++------------+
+|A A B C . F |
+|. . B C D F |
+|G P P . D F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 2: Car P-kanan
++------------+
+|A A B C . F |
+|. . B C D F |
+|G . P P D F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 3: Car D-atas
++------------+
+|A A B C D F |
+|. . B C D F |
+|G . P P . F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 4: Car P-kanan
++------------+
+|A A B C D F |
+|. . B C D F |
+|G . . P P F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 5: Car I-kiri
++------------+
+|A A B C D F |
+|. . B C D F |
+|G . . P P F |
+|G H I I I . |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 6: Car F-bawah
++------------+
+|A A B C D . |
+|. . B C D F |
+|G . . P P F |
+|G H I I I F |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 7: Car F-bawah
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . P P F |
+|G H I I I F |
+|G H J . . F |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 8: Car F-bawah
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . P P . |
+|G H I I I F |
+|G H J . . F |
+|L L J M M F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 9: Car P-kanan
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . . P P |
+|G H I I I F |
+|G H J . . F |
+|L L J M M F |
++------------+
+Door at position: (6, 2)
+

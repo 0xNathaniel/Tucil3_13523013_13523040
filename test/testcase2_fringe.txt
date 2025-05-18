@@ -1,0 +1,63 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: Fringe with blockingCarsAndExitDistance heuristic
+Total moves: 4
+Nodes explored: 257
+Time elapsed: 2 ms
+-------------------------
+
+Initial board state:
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (-1, 2)
+
+Gerakan ke- 1: Car J-atas
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H J I I I |
+|G H J . . . |
+|L L . M M . |
++------------+
+Door at position: (-1, 2)
+
+Gerakan ke- 2: Car L-kanan
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H J I I I |
+|G H J . . . |
+|. L L M M . |
++------------+
+Door at position: (-1, 2)
+
+Gerakan ke- 3: Car G-bawah
++------------+
+|A A B . . F |
+|. . B C D F |
+|. P P C D F |
+|G H J I I I |
+|G H J . . . |
+|G L L M M . |
++------------+
+Door at position: (-1, 2)
+
+Gerakan ke- 4: Car P-kiri
++------------+
+|A A B . . F |
+|. . B C D F |
+|P P . C D F |
+|G H J I I I |
+|G H J . . . |
+|G L L M M . |
++------------+
+Door at position: (-1, 2)
+

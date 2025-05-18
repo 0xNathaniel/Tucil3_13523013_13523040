@@ -1,0 +1,3022 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: Greedy with exitDistance heuristic
+Total moves: 273
+Nodes explored: 4206
+Time elapsed: 27 ms
+-------------------------
+
+Initial board state:
++------------+
+|G B B . L . |
+|G H I . L M |
+|G H I P P M |
+|C C C Z . M |
+|. . J Z D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 1: Car M-atas
++------------+
+|G B B . L M |
+|G H I . L M |
+|G H I P P M |
+|C C C Z . . |
+|. . J Z D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 2: Car F-kanan
++------------+
+|G B B . L M |
+|G H I . L M |
+|G H I P P M |
+|C C C Z . . |
+|. . J Z D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 3: Car Z-bawah
++------------+
+|G B B . L M |
+|G H I . L M |
+|G H I P P M |
+|C C C . . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 4: Car M-bawah
++------------+
+|G B B . L . |
+|G H I . L M |
+|G H I P P M |
+|C C C . . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 5: Car Z-atas
++------------+
+|G B B . L . |
+|G H I . L M |
+|G H I P P M |
+|C C C Z . M |
+|. . J Z D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 6: Car B-kanan
++------------+
+|G . B B L . |
+|G H I . L M |
+|G H I P P M |
+|C C C Z . M |
+|. . J Z D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 7: Car Z-bawah
++------------+
+|G . B B L . |
+|G H I . L M |
+|G H I P P M |
+|C C C . . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 8: Car C-kanan
++------------+
+|G . B B L . |
+|G H I . L M |
+|G H I P P M |
+|. C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 9: Car H-atas
++------------+
+|G H B B L . |
+|G H I . L M |
+|G . I P P M |
+|. C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 10: Car M-atas
++------------+
+|G H B B L M |
+|G H I . L M |
+|G . I P P M |
+|. C C C . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 11: Car G-bawah
++------------+
+|. H B B L M |
+|G H I . L M |
+|G . I P P M |
+|G C C C . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 12: Car M-bawah
++------------+
+|. H B B L . |
+|G H I . L M |
+|G . I P P M |
+|G C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 13: Car G-bawah
++------------+
+|. H B B L . |
+|. H I . L M |
+|G . I P P M |
+|G C C C . M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 14: Car H-bawah
++------------+
+|. . B B L . |
+|. H I . L M |
+|G H I P P M |
+|G C C C . M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 15: Car M-atas
++------------+
+|. . B B L M |
+|. H I . L M |
+|G H I P P M |
+|G C C C . . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 16: Car C-kanan
++------------+
+|. . B B L M |
+|. H I . L M |
+|G H I P P M |
+|G . C C C . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 17: Car M-bawah
++------------+
+|. . B B L . |
+|. H I . L M |
+|G H I P P M |
+|G . C C C M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 18: Car H-bawah
++------------+
+|. . B B L . |
+|. . I . L M |
+|G H I P P M |
+|G H C C C M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 19: Car H-bawah
++------------+
+|. . B B L . |
+|. . I . L M |
+|G . I P P M |
+|G H C C C M |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 20: Car M-atas
++------------+
+|. . B B L M |
+|. . I . L M |
+|G . I P P M |
+|G H C C C . |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 21: Car G-atas
++------------+
+|. . B B L M |
+|G . I . L M |
+|G . I P P M |
+|G H C C C . |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 22: Car M-bawah
++------------+
+|. . B B L . |
+|G . I . L M |
+|G . I P P M |
+|G H C C C M |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 23: Car G-atas
++------------+
+|G . B B L . |
+|G . I . L M |
+|G . I P P M |
+|. H C C C M |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 24: Car B-kiri
++------------+
+|G B B . L . |
+|G . I . L M |
+|G . I P P M |
+|. H C C C M |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 25: Car M-atas
++------------+
+|G B B . L M |
+|G . I . L M |
+|G . I P P M |
+|. H C C C . |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 26: Car H-atas
++------------+
+|G B B . L M |
+|G . I . L M |
+|G H I P P M |
+|. H C C C . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 27: Car M-bawah
++------------+
+|G B B . L . |
+|G . I . L M |
+|G H I P P M |
+|. H C C C M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 28: Car H-atas
++------------+
+|G B B . L . |
+|G H I . L M |
+|G H I P P M |
+|. . C C C M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 29: Car M-atas
++------------+
+|G B B . L M |
+|G H I . L M |
+|G H I P P M |
+|. . C C C . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 30: Car G-bawah
++------------+
+|. B B . L M |
+|G H I . L M |
+|G H I P P M |
+|G . C C C . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 31: Car M-bawah
++------------+
+|. B B . L . |
+|G H I . L M |
+|G H I P P M |
+|G . C C C M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 32: Car H-bawah
++------------+
+|. B B . L . |
+|G . I . L M |
+|G H I P P M |
+|G H C C C M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 33: Car M-atas
++------------+
+|. B B . L M |
+|G . I . L M |
+|G H I P P M |
+|G H C C C . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 34: Car H-bawah
++------------+
+|. B B . L M |
+|G . I . L M |
+|G . I P P M |
+|G H C C C . |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 35: Car M-bawah
++------------+
+|. B B . L . |
+|G . I . L M |
+|G . I P P M |
+|G H C C C M |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 36: Car G-bawah
++------------+
+|. B B . L . |
+|. . I . L M |
+|G . I P P M |
+|G H C C C M |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 37: Car M-atas
++------------+
+|. B B . L M |
+|. . I . L M |
+|G . I P P M |
+|G H C C C . |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 38: Car H-atas
++------------+
+|. B B . L M |
+|. . I . L M |
+|G H I P P M |
+|G H C C C . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 39: Car M-bawah
++------------+
+|. B B . L . |
+|. . I . L M |
+|G H I P P M |
+|G H C C C M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 40: Car H-atas
++------------+
+|. B B . L . |
+|. H I . L M |
+|G H I P P M |
+|G . C C C M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 41: Car M-atas
++------------+
+|. B B . L M |
+|. H I . L M |
+|G H I P P M |
+|G . C C C . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 42: Car C-kanan
++------------+
+|. B B . L M |
+|. H I . L M |
+|G H I P P M |
+|G . . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 43: Car J-atas
++------------+
+|. B B . L M |
+|. H I . L M |
+|G H I P P M |
+|G . J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 44: Car H-bawah
++------------+
+|. B B . L M |
+|. . I . L M |
+|G H I P P M |
+|G H J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 45: Car J-bawah
++------------+
+|. B B . L M |
+|. . I . L M |
+|G H I P P M |
+|G H . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 46: Car I-bawah
++------------+
+|. B B . L M |
+|. . . . L M |
+|G H I P P M |
+|G H I C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 47: Car H-bawah
++------------+
+|. B B . L M |
+|. . . . L M |
+|G . I P P M |
+|G H I C C C |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 48: Car I-atas
++------------+
+|. B B . L M |
+|. . I . L M |
+|G . I P P M |
+|G H . C C C |
+|G H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 49: Car J-atas
++------------+
+|. B B . L M |
+|. . I . L M |
+|G . I P P M |
+|G H J C C C |
+|G H J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 50: Car G-atas
++------------+
+|. B B . L M |
+|G . I . L M |
+|G . I P P M |
+|G H J C C C |
+|. H J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 51: Car J-bawah
++------------+
+|. B B . L M |
+|G . I . L M |
+|G . I P P M |
+|G H . C C C |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 52: Car I-bawah
++------------+
+|. B B . L M |
+|G . . . L M |
+|G . I P P M |
+|G H I C C C |
+|. H J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 53: Car H-atas
++------------+
+|. B B . L M |
+|G . . . L M |
+|G H I P P M |
+|G H I C C C |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 54: Car I-atas
++------------+
+|. B B . L M |
+|G . I . L M |
+|G H I P P M |
+|G H . C C C |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 55: Car J-atas
++------------+
+|. B B . L M |
+|G . I . L M |
+|G H I P P M |
+|G H J C C C |
+|. . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 56: Car H-atas
++------------+
+|. B B . L M |
+|G H I . L M |
+|G H I P P M |
+|G . J C C C |
+|. . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 57: Car J-bawah
++------------+
+|. B B . L M |
+|G H I . L M |
+|G H I P P M |
+|G . . C C C |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 58: Car I-bawah
++------------+
+|. B B . L M |
+|G H . . L M |
+|G H I P P M |
+|G . I C C C |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 59: Car G-bawah
++------------+
+|. B B . L M |
+|. H . . L M |
+|G H I P P M |
+|G . I C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 60: Car B-kiri
++------------+
+|B B . . L M |
+|. H . . L M |
+|G H I P P M |
+|G . I C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 61: Car I-atas
++------------+
+|B B . . L M |
+|. H I . L M |
+|G H I P P M |
+|G . . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 62: Car H-bawah
++------------+
+|B B . . L M |
+|. . I . L M |
+|G H I P P M |
+|G H . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 63: Car J-atas
++------------+
+|B B . . L M |
+|. . I . L M |
+|G H I P P M |
+|G H J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 64: Car I-atas
++------------+
+|B B I . L M |
+|. . I . L M |
+|G H . P P M |
+|G H J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 65: Car P-kiri
++------------+
+|B B I . L M |
+|. . I . L M |
+|G H P P . M |
+|G H J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 66: Car L-bawah
++------------+
+|B B I . . M |
+|. . I . L M |
+|G H P P L M |
+|G H J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 67: Car J-bawah
++------------+
+|B B I . . M |
+|. . I . L M |
+|G H P P L M |
+|G H . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 68: Car L-atas
++------------+
+|B B I . L M |
+|. . I . L M |
+|G H P P . M |
+|G H . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 69: Car H-atas
++------------+
+|B B I . L M |
+|. H I . L M |
+|G H P P . M |
+|G . . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 70: Car L-bawah
++------------+
+|B B I . . M |
+|. H I . L M |
+|G H P P L M |
+|G . . C C C |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 71: Car J-atas
++------------+
+|B B I . . M |
+|. H I . L M |
+|G H P P L M |
+|G . J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 72: Car L-atas
++------------+
+|B B I . L M |
+|. H I . L M |
+|G H P P . M |
+|G . J C C C |
+|G . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 73: Car E-kanan
++------------+
+|B B I . L M |
+|. H I . L M |
+|G H P P . M |
+|G . J C C C |
+|G . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 74: Car L-bawah
++------------+
+|B B I . . M |
+|. H I . L M |
+|G H P P L M |
+|G . J C C C |
+|G . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 75: Car G-bawah
++------------+
+|B B I . . M |
+|. H I . L M |
+|. H P P L M |
+|G . J C C C |
+|G . J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 76: Car H-bawah
++------------+
+|B B I . . M |
+|. . I . L M |
+|. H P P L M |
+|G H J C C C |
+|G . J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 77: Car H-bawah
++------------+
+|B B I . . M |
+|. . I . L M |
+|. . P P L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 78: Car P-kiri
++------------+
+|B B I . . M |
+|. . I . L M |
+|. P P . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 79: Car P-kiri
++------------+
+|B B I . . M |
+|. . I . L M |
+|P P . . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 80: Car I-bawah
++------------+
+|B B . . . M |
+|. . I . L M |
+|P P I . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 81: Car B-kanan
++------------+
+|. B B . . M |
+|. . I . L M |
+|P P I . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 82: Car B-kanan
++------------+
+|. . B B . M |
+|. . I . L M |
+|P P I . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 83: Car B-kanan
++------------+
+|. . . B B M |
+|. . I . L M |
+|P P I . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 84: Car I-atas
++------------+
+|. . I B B M |
+|. . I . L M |
+|P P . . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 85: Car P-kanan
++------------+
+|. . I B B M |
+|. . I . L M |
+|. P P . L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 86: Car P-kanan
++------------+
+|. . I B B M |
+|. . I . L M |
+|. . P P L M |
+|G H J C C C |
+|G H J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 87: Car H-atas
++------------+
+|. . I B B M |
+|. . I . L M |
+|. H P P L M |
+|G H J C C C |
+|G . J Z D D |
+|G E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 88: Car G-atas
++------------+
+|. . I B B M |
+|. . I . L M |
+|G H P P L M |
+|G H J C C C |
+|G . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 89: Car H-atas
++------------+
+|. . I B B M |
+|. H I . L M |
+|G H P P L M |
+|G . J C C C |
+|G . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 90: Car G-atas
++------------+
+|. . I B B M |
+|G H I . L M |
+|G H P P L M |
+|G . J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 91: Car H-bawah
++------------+
+|. . I B B M |
+|G . I . L M |
+|G H P P L M |
+|G H J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 92: Car G-atas
++------------+
+|G . I B B M |
+|G . I . L M |
+|G H P P L M |
+|. H J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 93: Car H-atas
++------------+
+|G . I B B M |
+|G H I . L M |
+|G H P P L M |
+|. . J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 94: Car H-atas
++------------+
+|G H I B B M |
+|G H I . L M |
+|G . P P L M |
+|. . J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 95: Car G-bawah
++------------+
+|. H I B B M |
+|G H I . L M |
+|G . P P L M |
+|G . J C C C |
+|. . J Z D D |
+|. E E Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 96: Car E-kiri
++------------+
+|. H I B B M |
+|G H I . L M |
+|G . P P L M |
+|G . J C C C |
+|. . J Z D D |
+|E E . Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 97: Car J-bawah
++------------+
+|. H I B B M |
+|G H I . L M |
+|G . P P L M |
+|G . . C C C |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 98: Car C-kiri
++------------+
+|. H I B B M |
+|G H I . L M |
+|G . P P L M |
+|G . C C C . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 99: Car C-kiri
++------------+
+|. H I B B M |
+|G H I . L M |
+|G . P P L M |
+|G C C C . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 100: Car G-bawah
++------------+
+|. H I B B M |
+|. H I . L M |
+|G . P P L M |
+|G C C C . . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 101: Car M-bawah
++------------+
+|. H I B B . |
+|. H I . L M |
+|G . P P L M |
+|G C C C . M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 102: Car P-kiri
++------------+
+|. H I B B . |
+|. H I . L M |
+|G P P . L M |
+|G C C C . M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 103: Car M-atas
++------------+
+|. H I B B M |
+|. H I . L M |
+|G P P . L M |
+|G C C C . . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 104: Car L-bawah
++------------+
+|. H I B B M |
+|. H I . . M |
+|G P P . L M |
+|G C C C L . |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 105: Car M-bawah
++------------+
+|. H I B B . |
+|. H I . . M |
+|G P P . L M |
+|G C C C L M |
+|G . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 106: Car G-atas
++------------+
+|. H I B B . |
+|G H I . . M |
+|G P P . L M |
+|G C C C L M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 107: Car M-atas
++------------+
+|. H I B B M |
+|G H I . . M |
+|G P P . L M |
+|G C C C L . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 108: Car L-atas
++------------+
+|. H I B B M |
+|G H I . L M |
+|G P P . L M |
+|G C C C . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 109: Car M-bawah
++------------+
+|. H I B B . |
+|G H I . L M |
+|G P P . L M |
+|G C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 110: Car G-atas
++------------+
+|G H I B B . |
+|G H I . L M |
+|G P P . L M |
+|. C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 111: Car M-atas
++------------+
+|G H I B B M |
+|G H I . L M |
+|G P P . L M |
+|. C C C . . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 112: Car L-bawah
++------------+
+|G H I B B M |
+|G H I . . M |
+|G P P . L M |
+|. C C C L . |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 113: Car M-bawah
++------------+
+|G H I B B . |
+|G H I . . M |
+|G P P . L M |
+|. C C C L M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 114: Car B-kanan
++------------+
+|G H I . B B |
+|G H I . . M |
+|G P P . L M |
+|. C C C L M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 115: Car L-atas
++------------+
+|G H I . B B |
+|G H I . L M |
+|G P P . L M |
+|. C C C . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 116: Car C-kiri
++------------+
+|G H I . B B |
+|G H I . L M |
+|G P P . L M |
+|C C C . . M |
+|. . J Z D D |
+|E E J Z F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 117: Car Z-atas
++------------+
+|G H I . B B |
+|G H I . L M |
+|G P P . L M |
+|C C C Z . M |
+|. . J Z D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 118: Car Z-atas
++------------+
+|G H I . B B |
+|G H I . L M |
+|G P P Z L M |
+|C C C Z . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 119: Car Z-atas
++------------+
+|G H I . B B |
+|G H I Z L M |
+|G P P Z L M |
+|C C C . . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 120: Car Z-atas
++------------+
+|G H I Z B B |
+|G H I Z L M |
+|G P P . L M |
+|C C C . . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 121: Car P-kanan
++------------+
+|G H I Z B B |
+|G H I Z L M |
+|G . P P L M |
+|C C C . . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 122: Car C-kanan
++------------+
+|G H I Z B B |
+|G H I Z L M |
+|G . P P L M |
+|. C C C . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 123: Car F-kiri
++------------+
+|G H I Z B B |
+|G H I Z L M |
+|G . P P L M |
+|. C C C . M |
+|. . J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 124: Car H-bawah
++------------+
+|G . I Z B B |
+|G H I Z L M |
+|G H P P L M |
+|. C C C . M |
+|. . J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 125: Car L-bawah
++------------+
+|G . I Z B B |
+|G H I Z . M |
+|G H P P L M |
+|. C C C L M |
+|. . J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 126: Car F-kanan
++------------+
+|G . I Z B B |
+|G H I Z . M |
+|G H P P L M |
+|. C C C L M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 127: Car G-bawah
++------------+
+|. . I Z B B |
+|G H I Z . M |
+|G H P P L M |
+|G C C C L M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 128: Car L-atas
++------------+
+|. . I Z B B |
+|G H I Z L M |
+|G H P P L M |
+|G C C C . M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 129: Car G-bawah
++------------+
+|. . I Z B B |
+|. H I Z L M |
+|G H P P L M |
+|G C C C . M |
+|G . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 130: Car C-kanan
++------------+
+|. . I Z B B |
+|. H I Z L M |
+|G H P P L M |
+|G . C C C M |
+|G . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 131: Car H-bawah
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G H P P L M |
+|G H C C C M |
+|G . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 132: Car G-atas
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G H P P L M |
+|G H C C C M |
+|. . J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 133: Car H-bawah
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G . P P L M |
+|G H C C C M |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 134: Car D-kiri
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G . P P L M |
+|G H C C C M |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 135: Car G-bawah
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G . P P L M |
+|G H C C C M |
+|G H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 136: Car P-kiri
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|G H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 137: Car Z-bawah
++------------+
+|. . I . B B |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|G H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 138: Car M-bawah
++------------+
+|. . I . B B |
+|. . I Z L . |
+|G P P Z L M |
+|G H C C C M |
+|G H J D D M |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 139: Car Z-atas
++------------+
+|. . I Z B B |
+|. . I Z L . |
+|G P P . L M |
+|G H C C C M |
+|G H J D D M |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 140: Car G-atas
++------------+
+|. . I Z B B |
+|G . I Z L . |
+|G P P . L M |
+|G H C C C M |
+|. H J D D M |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 141: Car M-atas
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 142: Car Z-bawah
++------------+
+|. . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 143: Car G-atas
++------------+
+|G . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|. H C C C M |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 144: Car Z-atas
++------------+
+|G . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|. H C C C M |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 145: Car F-kiri
++------------+
+|G . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|. H C C C M |
+|. H J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 146: Car M-bawah
++------------+
+|G . I Z B B |
+|G . I Z L . |
+|G P P . L M |
+|. H C C C M |
+|. H J D D M |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 147: Car Z-bawah
++------------+
+|G . I . B B |
+|G . I Z L . |
+|G P P Z L M |
+|. H C C C M |
+|. H J D D M |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 148: Car M-bawah
++------------+
+|G . I . B B |
+|G . I Z L . |
+|G P P Z L . |
+|. H C C C M |
+|. H J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 149: Car Z-atas
++------------+
+|G . I Z B B |
+|G . I Z L . |
+|G P P . L . |
+|. H C C C M |
+|. H J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 150: Car G-bawah
++------------+
+|. . I Z B B |
+|G . I Z L . |
+|G P P . L . |
+|G H C C C M |
+|. H J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 151: Car Z-bawah
++------------+
+|. . I . B B |
+|G . I Z L . |
+|G P P Z L . |
+|G H C C C M |
+|. H J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 152: Car G-bawah
++------------+
+|. . I . B B |
+|. . I Z L . |
+|G P P Z L . |
+|G H C C C M |
+|G H J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 153: Car M-atas
++------------+
+|. . I . B B |
+|. . I Z L . |
+|G P P Z L M |
+|G H C C C M |
+|G H J D D M |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 154: Car Z-atas
++------------+
+|. . I Z B B |
+|. . I Z L . |
+|G P P . L M |
+|G H C C C M |
+|G H J D D M |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 155: Car M-atas
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|G H J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 156: Car Z-bawah
++------------+
+|. . I . B B |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|G H J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 157: Car D-kanan
++------------+
+|. . I . B B |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|G H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 158: Car Z-atas
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|G H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 159: Car G-atas
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 160: Car Z-bawah
++------------+
+|. . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 161: Car G-atas
++------------+
+|G . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|. H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 162: Car Z-atas
++------------+
+|G . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|. H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 163: Car F-kanan
++------------+
+|G . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|. H C C C M |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 164: Car Z-bawah
++------------+
+|G . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|. H C C C M |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 165: Car G-bawah
++------------+
+|. . I . B B |
+|G . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 166: Car Z-atas
++------------+
+|. . I Z B B |
+|G . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 167: Car G-bawah
++------------+
+|. . I Z B B |
+|. . I Z L M |
+|G P P . L M |
+|G H C C C M |
+|G H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 168: Car Z-bawah
++------------+
+|. . I . B B |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|G H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 169: Car B-kiri
++------------+
+|. . I B B . |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|G H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 170: Car M-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C . |
+|G H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 171: Car F-kiri
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H C C C . |
+|G H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 172: Car G-atas
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H C C C . |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 173: Car M-bawah
++------------+
+|. . I B B . |
+|G . I Z L M |
+|G P P Z L M |
+|G H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 174: Car G-atas
++------------+
+|G . I B B . |
+|G . I Z L M |
+|G P P Z L M |
+|. H C C C M |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 175: Car M-atas
++------------+
+|G . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|. H C C C . |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 176: Car C-kanan
++------------+
+|G . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|. H . C C C |
+|. H J . D D |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 177: Car J-atas
++------------+
+|G . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|. H J C C C |
+|. H J . D D |
+|E E . F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 178: Car F-kanan
++------------+
+|G . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|. H J C C C |
+|. H J . D D |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 179: Car G-bawah
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|. H J . D D |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 180: Car J-bawah
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H . C C C |
+|. H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 181: Car G-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H . C C C |
+|G H J . D D |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 182: Car J-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J . D D |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 183: Car D-kiri
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 184: Car J-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H . C C C |
+|G H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 185: Car G-atas
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H . C C C |
+|. H J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 186: Car F-kiri
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H . C C C |
+|. H J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 187: Car J-atas
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|. H J D D . |
+|E E . F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 188: Car G-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|E E . F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 189: Car E-kanan
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|. E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 190: Car G-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|. P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 191: Car F-kanan
++------------+
+|. . I B B M |
+|. . I Z L M |
+|. P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 192: Car G-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 193: Car G-atas
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|. H J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 194: Car F-kiri
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|. H J D D . |
+|. E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 195: Car D-kanan
++------------+
+|. . I B B M |
+|G . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|. H J . D D |
+|. E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 196: Car G-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|G P P Z L M |
+|G H J C C C |
+|G H J . D D |
+|. E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 197: Car G-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|. P P Z L M |
+|G H J C C C |
+|G H J . D D |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 198: Car P-kiri
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J . D D |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 199: Car J-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . . D D |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 200: Car F-kanan
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . . D D |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 201: Car J-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J . D D |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 202: Car I-bawah
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 203: Car F-kiri
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 204: Car D-kiri
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 205: Car I-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 206: Car J-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . D D . |
+|G E E F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 207: Car F-kanan
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . D D . |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 208: Car J-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 209: Car I-bawah
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J D D . |
+|G E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 210: Car E-kanan
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 211: Car I-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 212: Car J-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 213: Car H-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G . J C C C |
+|G H . D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 214: Car J-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 215: Car I-bawah
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 216: Car D-kanan
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 217: Car I-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 218: Car J-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G . J C C C |
+|G H . . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 219: Car H-atas
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P J Z L M |
+|G H J C C C |
+|G H . . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 220: Car J-bawah
++------------+
+|. . I B B M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 221: Car I-bawah
++------------+
+|. . . B B M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 222: Car B-kiri
++------------+
+|. . B B . M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 223: Car L-atas
++------------+
+|. . B B L M |
+|. . I Z L M |
+|P P I Z . M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 224: Car H-bawah
++------------+
+|. . B B L M |
+|. . I Z L M |
+|P P I Z . M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 225: Car L-bawah
++------------+
+|. . B B . M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 226: Car D-kiri
++------------+
+|. . B B . M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 227: Car L-atas
++------------+
+|. . B B L M |
+|. . I Z L M |
+|P P I Z . M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 228: Car H-atas
++------------+
+|. . B B L M |
+|. . I Z L M |
+|P P I Z . M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 229: Car B-kiri
++------------+
+|. B B . L M |
+|. . I Z L M |
+|P P I Z . M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 230: Car Z-atas
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|P P I . . M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 231: Car L-bawah
++------------+
+|. B B Z . M |
+|. . I Z L M |
+|P P I . L M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 232: Car Z-bawah
++------------+
+|. B B . . M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J D D . |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 233: Car H-bawah
++------------+
+|. B B . . M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 234: Car Z-atas
++------------+
+|. B B Z . M |
+|. . I Z L M |
+|P P I . L M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 235: Car L-atas
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|P P I . . M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 236: Car Z-bawah
++------------+
+|. B B . L M |
+|. . I Z L M |
+|P P I Z . M |
+|G . J C C C |
+|G H J D D . |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 237: Car D-kanan
++------------+
+|. B B . L M |
+|. . I Z L M |
+|P P I Z . M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 238: Car Z-atas
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|P P I . . M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 239: Car L-bawah
++------------+
+|. B B Z . M |
+|. . I Z L M |
+|P P I . L M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 240: Car Z-bawah
++------------+
+|. B B . . M |
+|. . I Z L M |
+|P P I Z L M |
+|G . J C C C |
+|G H J . D D |
+|G H E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 241: Car H-atas
++------------+
+|. B B . . M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 242: Car Z-atas
++------------+
+|. B B Z . M |
+|. . I Z L M |
+|P P I . L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 243: Car L-atas
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|P P I . . M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 244: Car Z-bawah
++------------+
+|. B B . L M |
+|. . I Z L M |
+|P P I Z . M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 245: Car B-kiri
++------------+
+|B B . . L M |
+|. . I Z L M |
+|P P I Z . M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 246: Car Z-atas
++------------+
+|B B . Z L M |
+|. . I Z L M |
+|P P I . . M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 247: Car L-bawah
++------------+
+|B B . Z . M |
+|. . I Z L M |
+|P P I . L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 248: Car Z-bawah
++------------+
+|B B . . . M |
+|. . I Z L M |
+|P P I Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 249: Car I-atas
++------------+
+|B B I . . M |
+|. . I Z L M |
+|P P . Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 250: Car P-kanan
++------------+
+|B B I . . M |
+|. . I Z L M |
+|. P P Z L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 251: Car Z-atas
++------------+
+|B B I Z . M |
+|. . I Z L M |
+|. P P . L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 252: Car P-kanan
++------------+
+|B B I Z . M |
+|. . I Z L M |
+|. . P P L M |
+|G H J C C C |
+|G H J . D D |
+|G . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 253: Car G-atas
++------------+
+|B B I Z . M |
+|. . I Z L M |
+|G . P P L M |
+|G H J C C C |
+|G H J . D D |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 254: Car L-atas
++------------+
+|B B I Z L M |
+|. . I Z L M |
+|G . P P . M |
+|G H J C C C |
+|G H J . D D |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 255: Car P-kanan
++------------+
+|B B I Z L M |
+|. . I Z L M |
+|G . . P P M |
+|G H J C C C |
+|G H J . D D |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 256: Car D-kiri
++------------+
+|B B I Z L M |
+|. . I Z L M |
+|G . . P P M |
+|G H J C C C |
+|G H J D D . |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 257: Car E-kiri
++------------+
+|B B I Z L M |
+|. . I Z L M |
+|G . . P P M |
+|G H J C C C |
+|G H J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 258: Car I-bawah
++------------+
+|B B . Z L M |
+|. . I Z L M |
+|G . I P P M |
+|G H J C C C |
+|G H J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 259: Car B-kanan
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|G . I P P M |
+|G H J C C C |
+|G H J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 260: Car H-atas
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|G H I P P M |
+|G H J C C C |
+|G . J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 261: Car E-kanan
++------------+
+|. B B Z L M |
+|. . I Z L M |
+|G H I P P M |
+|G H J C C C |
+|G . J D D . |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 262: Car H-atas
++------------+
+|. B B Z L M |
+|. H I Z L M |
+|G H I P P M |
+|G . J C C C |
+|G . J D D . |
+|. . E E F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 263: Car E-kiri
++------------+
+|. B B Z L M |
+|. H I Z L M |
+|G H I P P M |
+|G . J C C C |
+|G . J D D . |
+|. E E . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 264: Car E-kiri
++------------+
+|. B B Z L M |
+|. H I Z L M |
+|G H I P P M |
+|G . J C C C |
+|G . J D D . |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 265: Car G-atas
++------------+
+|. B B Z L M |
+|G H I Z L M |
+|G H I P P M |
+|G . J C C C |
+|. . J D D . |
+|E E . . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 266: Car J-bawah
++------------+
+|. B B Z L M |
+|G H I Z L M |
+|G H I P P M |
+|G . . C C C |
+|. . J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 267: Car H-bawah
++------------+
+|. B B Z L M |
+|G . I Z L M |
+|G H I P P M |
+|G H . C C C |
+|. . J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 268: Car C-kiri
++------------+
+|. B B Z L M |
+|G . I Z L M |
+|G H I P P M |
+|G H C C C . |
+|. . J D D . |
+|E E J . F F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 269: Car F-kiri
++------------+
+|. B B Z L M |
+|G . I Z L M |
+|G H I P P M |
+|G H C C C . |
+|. . J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 270: Car M-bawah
++------------+
+|. B B Z L . |
+|G . I Z L M |
+|G H I P P M |
+|G H C C C M |
+|. . J D D . |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 271: Car M-bawah
++------------+
+|. B B Z L . |
+|G . I Z L . |
+|G H I P P M |
+|G H C C C M |
+|. . J D D M |
+|E E J F F . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 272: Car M-bawah
++------------+
+|. B B Z L . |
+|G . I Z L . |
+|G H I P P . |
+|G H C C C M |
+|. . J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 273: Car P-kanan
++------------+
+|. B B Z L . |
+|G . I Z L . |
+|G H I . P P |
+|G H C C C M |
+|. . J D D M |
+|E E J F F M |
++------------+
+Door at position: (6, 2)
+
