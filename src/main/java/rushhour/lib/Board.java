@@ -117,18 +117,38 @@ public class Board {
     }
     
     public boolean isSolved() {
-        for (Car car : cars) {
-            if (car.isPrimary()) {
-                if (car.isHorizontal()) {
-                    return car.getX() + car.getLength() == doorX && car.getY() == doorY;
-                } else {
-                    return (car.getY() + car.getLength() == doorY && car.getX() == doorX) || 
-                           (car.getY() == 0 && doorY == 0 && car.getX() == doorX);
+    for (Car car : cars) {
+        if (car.isPrimary()) {
+            if (car.isHorizontal()) {
+                //right door (doorX == width)
+                if (doorX == width && car.getX() + car.getLength() == width && car.getY() == doorY) {
+                    return true;
+                }
+                //left door (doorX == -1)
+                else if (doorX == -1 && car.getX() == 0 && car.getY() == doorY) {
+                    return true;
+                }
+                else if (doorX >= 0 && doorX < width && 
+                         car.getX() + car.getLength() == doorX && car.getY() == doorY) {
+                    return true;
+                }
+            } else {//vertical car
+                if (doorY == height && car.getY() + car.getLength() == height && car.getX() == doorX) {
+                    return true;
+                }
+                else if (doorY == -1 && car.getY() == 0 && car.getX() == doorX) {
+                    return true;
+                }
+                else if (doorY >= 0 && doorY < height &&
+                         car.getY() + car.getLength() == doorY && car.getX() == doorX) {
+                    return true;
                 }
             }
+            return false;
         }
-        return false;
     }
+    return false;
+}
     
     public void printBoard() {
         for (int i = 0; i < height + 2; i++) {

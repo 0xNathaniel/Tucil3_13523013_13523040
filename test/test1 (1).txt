@@ -1,9 +1,6 @@
-6 6
-11
- K
-AAB..F
-..BCDF
-GPBCDF
-GP.III
-GHH...
-LL.MM.
+3 3
+1
+K
+.AA
+P..
+P..

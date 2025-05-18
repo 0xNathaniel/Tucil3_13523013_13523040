@@ -100,23 +100,32 @@ public class BoardRenderer {
         }
 
         int doorX = boardObj.getDoorX();
-        int doorY = boardObj.getDoorY();
-        
-        if (doorX >= 0 && doorX <= width && doorY >= 0 && doorY <= height) {
-            Rectangle doorMarker = new Rectangle(12, 12);
-            doorMarker.setFill(Color.LIGHTGREEN);
-            doorMarker.setStroke(Color.GREEN);
-            doorMarker.setStrokeWidth(2);
-            doorMarker.setArcHeight(6);
-            doorMarker.setArcWidth(6);
-            StackPane doorCell = new StackPane(doorMarker);
-            doorCell.getStyleClass().add("door-marker");
-            
-            if (doorX == width) { 
-                gridPane.add(doorCell, doorX, doorY + 1);
-            } else if (doorY == height) {
-                gridPane.add(doorCell, doorX + 1, doorY);
-            }
-        }
+    int doorY = boardObj.getDoorY();
+    
+    Rectangle doorMarker = new Rectangle(18, 18);
+    doorMarker.setFill(Color.LIGHTGREEN);
+    doorMarker.setStroke(Color.GREEN);
+    doorMarker.setStrokeWidth(2);
+    doorMarker.setArcHeight(8);
+    doorMarker.setArcWidth(8);
+    
+    Label doorLabel = new Label("");
+    doorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: darkgreen; -fx-font-size: 12px;");
+    
+    StackPane doorCell = new StackPane(doorMarker, doorLabel);
+    doorCell.getStyleClass().add("door-marker");
+    
+    if (doorX == width) {
+        gridPane.add(doorCell, width + 1, doorY + 1);
+    } 
+    else if (doorY == height) {
+        gridPane.add(doorCell, doorX + 1, height + 1);
+    }
+    else if (doorX == -1) {
+        gridPane.add(doorCell, 0, doorY + 1);
+    }
+    else if (doorY == -1) {
+        gridPane.add(doorCell, doorX + 1, 0);
+    }
     }
 }

@@ -6,6 +6,7 @@ rushhour\lib\State.class
 module-info.class
 rushhour\lib\Board.class
 rushhour\lib\Load.class
+rushhour\lib\StringExtensions.class
 rushhour\UIBuilder.class
 rushhour\lib\Algorithm.class
 rushhour\lib\Car.class

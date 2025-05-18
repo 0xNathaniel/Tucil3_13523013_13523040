@@ -9,9 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.effect.DropShadow;
 import javafx.util.Duration;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.transform.Scale;
 import javafx.geometry.Point2D;
 
@@ -358,112 +358,171 @@ public class App extends Application {
     }
 
     private void handleLoad() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open Rush Hour Puzzle File");
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File selectedFile = chooser.showOpenDialog(null);
+    FileChooser chooser = new FileChooser();
+    chooser.setTitle("Open Rush Hour Puzzle File");
+    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+    File selectedFile = chooser.showOpenDialog(null);
 
-        if (selectedFile != null) {
-            try {
-                board = Load.loadGame(selectedFile);
-                currentlyMovingCar = '.'; 
-                BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
-                statusLabel.setText("Puzzle loaded successfully from " + selectedFile.getName());
-                solveButton.setDisable(false);
+    if (selectedFile != null) {
+        try {
+            board = Load.loadGame(selectedFile);
+
+            board.printBoard();
+            
+            if (board == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Loading Error (Please Check Primary Car or Other Cars Posisiton or Count)");
+                alert.setHeaderText("Failed to load puzzle");
+                alert.setContentText("The puzzle file has invalid format or piece count mismatch.");
+                alert.showAndWait();
                 
+                statusLabel.setText("Failed to load puzzle: Invalid format or piece count mismatch.");
+                solveButton.setDisable(true);
                 resetAnimationControls();
-                
-            } catch (FileNotFoundException ex) {
-                statusLabel.setText("File tidak ditemukan: " + ex.getMessage());
-            } catch (InputMismatchException ex) {
-                statusLabel.setText("Format file tidak valid: " + ex.getMessage());
-            } catch (RuntimeException ex) {
-                statusLabel.setText("Terjadi kesalahan saat memuat puzzle: " + ex.getMessage());
+                return;
             }
+            
+            currentlyMovingCar = '.'; 
+            BoardRenderer.drawBoard(board, gridPane, carRectangles, currentlyMovingCar);
+            statusLabel.setText("Puzzle loaded successfully from " + selectedFile.getName());
+            solveButton.setDisable(false);
+            
+            resetAnimationControls();
+            
+        } catch (FileNotFoundException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("File Error");
+            alert.setHeaderText("File not found");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
+            
+            statusLabel.setText("File tidak ditemukan: " + ex.getMessage());
+            solveButton.setDisable(true);
+        } catch (InputMismatchException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Format Error");
+            alert.setHeaderText("Invalid file format");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
+            
+            statusLabel.setText("Format file tidak valid: " + ex.getMessage());
+            solveButton.setDisable(true);
+        } catch (RuntimeException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Loading Error");
+            alert.setHeaderText("Failed to load puzzle");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
+            
+            statusLabel.setText("Terjadi kesalahan saat memuat puzzle: " + ex.getMessage());
+            solveButton.setDisable(true);
         }
     }
+}
 
     private void handleSolve() {
-        String algo = algoBox.getValue();
-        String heuristic = heuristicBox.getValue();
+    String algo = algoBox.getValue();
+    String heuristic = heuristicBox.getValue();
+    
+    if (algo == null || (algo.matches("A\\*|Greedy|Fringe") && heuristic == null)) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Selection Required");
+        alert.setHeaderText("Missing algorithm selection");
+        alert.setContentText("Please select both algorithm and heuristic if required.");
+        alert.showAndWait();
         
-        if (algo == null || (algo.matches("A\\*|Greedy|Fringe") && heuristic == null)) {
-            statusLabel.setText("Please select both algorithm and heuristic if required.");
-            return;
-        }
+        statusLabel.setText("Please select both algorithm and heuristic if required.");
+        return;
+    }
 
-        statusLabel.setText("Solving puzzle using " + algo + "...");
-        solveButton.setDisable(true);
+    if (board == null) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Board Error");
+        alert.setHeaderText("No board loaded");
+        alert.setContentText("Please load a valid puzzle first.");
+        alert.showAndWait();
         
-        new Thread(() -> {
-            try {
-                List<Move> result = null;
-                int numNodesExplored = 0;
-                long timeElapsedMs = 0;
+        statusLabel.setText("⚠️ Error on loading board. Please load a puzzle first.");
+        statusLabel.getStyleClass().add("error-status");
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        pause.setOnFinished(e -> statusLabel.getStyleClass().remove("error-status"));
+        pause.play();
+        return;
+    }
+
+    statusLabel.setText("Solving puzzle using " + algo + "...");
+    solveButton.setDisable(true);
+    
+    new Thread(() -> {
+        try {
+            List<Move> result = null;
+            int numNodesExplored = 0;
+            long timeElapsedMs = 0;
+            
+            switch (algo) {
+                case "UCS":
+                    UCS ucs = new UCS(board);
+                    result = ucs.solve();
+                    numNodesExplored = ucs.getNodesExplored();
+                    timeElapsedMs = ucs.getTimeElapsed();
+                    break;
+                case "A*":
+                    AStar aStar = new AStar(board);
+                    result = aStar.solve(heuristic);
+                    numNodesExplored = aStar.getNodesExplored();
+                    timeElapsedMs = aStar.getTimeElapsed();
+                    break;
+                case "Greedy":
+                    Greedy greedy = new Greedy(board);
+                    result = greedy.solve(heuristic);
+                    numNodesExplored = greedy.getNodesExplored();
+                    timeElapsedMs = greedy.getTimeElapsed();
+                    break;
+                case "Fringe":
+                    Fringe fringe = new Fringe(board);
+                    result = fringe.solve(heuristic);
+                    numNodesExplored = fringe.getNodesExplored();
+                    timeElapsedMs = fringe.getTimeElapsed();
+                    break;
+            }
+            
+            final List<Move> finalResult = result;
+            final int finalNodes = numNodesExplored;
+            final long finalTime = timeElapsedMs;
+            
+            javafx.application.Platform.runLater(() -> {
+                moves = finalResult;
+                nodesExplored.setText(String.valueOf(finalNodes));
+                timeElapsed.setText(finalTime + " ms");
                 
-                switch (algo) {
-                    case "UCS":
-                        UCS ucs = new UCS(board);
-                        result = ucs.solve();
-                        numNodesExplored = ucs.getNodesExplored();
-                        timeElapsedMs = ucs.getTimeElapsed();
-                        break;
-                    case "A*":
-                        AStar aStar = new AStar(board);
-                        result = aStar.solve(heuristic);
-                        numNodesExplored = aStar.getNodesExplored();
-                        timeElapsedMs = aStar.getTimeElapsed();
-                        break;
-                    case "Greedy":
-                        Greedy greedy = new Greedy(board);
-                        result = greedy.solve(heuristic);
-                        numNodesExplored = greedy.getNodesExplored();
-                        timeElapsedMs = greedy.getTimeElapsed();
-                        break;
-                    case "Fringe":
-                        Fringe fringe = new Fringe(board);
-                        result = fringe.solve(heuristic);
-                        numNodesExplored = fringe.getNodesExplored();
-                        timeElapsedMs = fringe.getTimeElapsed();
-                        break;
+                if (moves == null || moves.isEmpty()) {
+                    statusLabel.setText("No solution found after exploring " + finalNodes + " nodes.");
+                    saveButton.setDisable(true);
+                    resetAnimationControls();
+                } else {
+                    statusLabel.setText("Solution found with " + moves.size() + " moves!");
+                    moveCountLabel.setText("Move: 0 / " + moves.size());
+                    
+                    playButton.setDisable(false);
+                    stopButton.setDisable(false);
+                    animationSpeedSlider.setDisable(false);
+                    slowDownButton.setDisable(false);
+                    speedUpButton.setDisable(false);
+                    saveButton.setDisable(false);
                 }
                 
-                final List<Move> finalResult = result;
-                final int finalNodes = numNodesExplored;
-                final long finalTime = timeElapsedMs;
-                
-                javafx.application.Platform.runLater(() -> {
-                    moves = finalResult;
-                    nodesExplored.setText(String.valueOf(finalNodes));
-                    timeElapsed.setText(finalTime + " ms");
-                    
-                    if (moves == null || moves.isEmpty()) {
-                        statusLabel.setText("No solution found after exploring " + finalNodes + " nodes.");
-                        saveButton.setDisable(true);
-                    } else {
-                        statusLabel.setText("Solution found with " + moves.size() + " moves!");
-                        moveCountLabel.setText("Move: 0 / " + moves.size());
-                        
-                        playButton.setDisable(false);
-                        stopButton.setDisable(false);
-                        animationSpeedSlider.setDisable(false);
-                        slowDownButton.setDisable(false);
-                        speedUpButton.setDisable(false);
-                        saveButton.setDisable(false);
-                    }
-                    
-                    solveButton.setDisable(false);
-                });
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-                javafx.application.Platform.runLater(() -> {
-                    statusLabel.setText("Error solving puzzle: " + e.getMessage());
-                    solveButton.setDisable(false);
-                });
-            }
-        }).start();
-    }
+                solveButton.setDisable(false);
+            });
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            javafx.application.Platform.runLater(() -> {
+                statusLabel.setText("Error solving puzzle: " + e.getMessage());
+                solveButton.setDisable(false);
+            });
+        }
+    }).start();
+}
 
     private void playAnimation() {
         if (moves == null || moves.isEmpty()) return;

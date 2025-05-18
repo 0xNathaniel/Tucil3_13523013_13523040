@@ -46,6 +46,17 @@
   -fx-background-color: transparent;
 }
 
+.error-status {
+    -fx-text-fill: #ff3333;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-color: #ffeeee;
+    -fx-padding: 5px 10px;
+    -fx-border-color: #ff3333;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
 .control-panel {
   -fx-background-color: #ffffff;
   -fx-border-color: #e0e0e0;
