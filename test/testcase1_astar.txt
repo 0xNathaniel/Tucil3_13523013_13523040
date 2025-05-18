@@ -1,0 +1,118 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: A* with blockingCarsAndExitDistance heuristic
+Total moves: 9
+Nodes explored: 345
+Time elapsed: 5 ms
+-------------------------
+
+Initial board state:
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H . I I I |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 1: Car I-kiri
++------------+
+|A A B . . F |
+|. . B C D F |
+|G P P C D F |
+|G H I I I . |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 2: Car D-atas
++------------+
+|A A B . D F |
+|. . B C D F |
+|G P P C . F |
+|G H I I I . |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 3: Car F-bawah
++------------+
+|A A B . D . |
+|. . B C D F |
+|G P P C . F |
+|G H I I I F |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 4: Car C-atas
++------------+
+|A A B C D . |
+|. . B C D F |
+|G P P . . F |
+|G H I I I F |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 5: Car P-kanan
++------------+
+|A A B C D . |
+|. . B C D F |
+|G . P P . F |
+|G H I I I F |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 6: Car P-kanan
++------------+
+|A A B C D . |
+|. . B C D F |
+|G . . P P F |
+|G H I I I F |
+|G H J . . . |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 7: Car F-bawah
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . P P F |
+|G H I I I F |
+|G H J . . F |
+|L L J M M . |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 8: Car F-bawah
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . P P . |
+|G H I I I F |
+|G H J . . F |
+|L L J M M F |
++------------+
+Door at position: (6, 2)
+
+Gerakan ke- 9: Car P-kanan
++------------+
+|A A B C D . |
+|. . B C D . |
+|G . . . P P |
+|G H I I I F |
+|G H J . . F |
+|L L J M M F |
++------------+
+Door at position: (6, 2)
+

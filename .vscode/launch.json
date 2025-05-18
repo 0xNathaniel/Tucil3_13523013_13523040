@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "App",
+        "request": "launch",
+        "mainClass": "rushhour/rushhour.App",
+        "projectName": "rushhour"
+      }
+    ]
+  }
+  

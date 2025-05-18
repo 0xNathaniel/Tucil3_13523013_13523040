@@ -1,0 +1,173 @@
+Rush Hour Puzzle Solution
+-------------------------
+Algorithm used: Greedy with exitDistance heuristic
+Total moves: 14
+Nodes explored: 24
+Time elapsed: 1 ms
+-------------------------
+
+Initial board state:
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|. . X X X . |
+|. C C . B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 1: Car A-kanan
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|. . X X X . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 2: Car J-bawah
++------------+
+|. . . . E E |
+|. J . P . W |
+|. J . P . W |
+|. J X X X . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 3: Car X-kanan
++------------+
+|. . . . E E |
+|. J . P . W |
+|. J . P . W |
+|. J . X X X |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 4: Car J-atas
++------------+
+|. J . . E E |
+|. J . P . W |
+|. J . P . W |
+|. . . X X X |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 5: Car E-kiri
++------------+
+|. J . E E . |
+|. J . P . W |
+|. J . P . W |
+|. . . X X X |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 6: Car J-bawah
++------------+
+|. . . E E . |
+|. J . P . W |
+|. J . P . W |
+|. J . X X X |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 7: Car X-kiri
++------------+
+|. . . E E . |
+|. J . P . W |
+|. J . P . W |
+|. J X X X . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 8: Car J-atas
++------------+
+|. J . E E . |
+|. J . P . W |
+|. J . P . W |
+|. . X X X . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 9: Car X-kiri
++------------+
+|. J . E E . |
+|. J . P . W |
+|. J . P . W |
+|. X X X . . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 10: Car X-kiri
++------------+
+|. J . E E . |
+|. J . P . W |
+|. J . P . W |
+|X X X . . . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 11: Car P-bawah
++------------+
+|. J . E E . |
+|. J . . . W |
+|. J . P . W |
+|X X X P . . |
+|. C C . B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 12: Car P-bawah
++------------+
+|. J . E E . |
+|. J . . . W |
+|. J . . . W |
+|X X X P . . |
+|. C C P B B |
+|. A A A D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 13: Car A-kiri
++------------+
+|. J . E E . |
+|. J . . . W |
+|. J . . . W |
+|X X X P . . |
+|. C C P B B |
+|A A A . D D |
++------------+
+Door at position: (3, 6)
+
+Gerakan ke- 14: Car P-bawah
++------------+
+|. J . E E . |
+|. J . . . W |
+|. J . . . W |
+|X X X . . . |
+|. C C P B B |
+|A A A P D D |
++------------+
+Door at position: (3, 6)
+
