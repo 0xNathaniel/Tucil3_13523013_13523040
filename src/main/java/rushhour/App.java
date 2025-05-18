@@ -106,9 +106,7 @@ public class App extends Application {
         );
         mainContainer.setBottom(controlPanel);
         
-        VBox animationControls = UIBuilder.createAnimationControls(
-            playButton, pauseButton, stopButton,
-            slowDownButton, speedUpButton, animationSpeedSlider, speedLabel,
+        VBox animationControls = UIBuilder.createAnimationControls(playButton, pauseButton, stopButton,slowDownButton, speedUpButton, animationSpeedSlider, speedLabel,
             e -> playAnimation(),
             e -> pauseAnimation(),
             e -> stopAnimation(),

@@ -140,20 +140,7 @@ public class UIBuilder {
         return controlPanel;
     }
     
-    public static VBox createAnimationControls(
-            Button playButton,
-            Button pauseButton, 
-            Button stopButton,
-            Button slowDownButton,
-            Button speedUpButton,
-            Slider animationSpeedSlider,
-            Label speedLabel,
-            EventHandler<ActionEvent> onPlayClicked,
-            EventHandler<ActionEvent> onPauseClicked,
-            EventHandler<ActionEvent> onStopClicked,
-            EventHandler<ActionEvent> onSlowDownClicked,
-            EventHandler<ActionEvent> onSpeedUpClicked,
-            ChangeListener<Number> onSpeedChanged) {
+    public static VBox createAnimationControls(Button playButton,Button pauseButton, Button stopButton,Button slowDownButton,Button speedUpButton,Slider animationSpeedSlider,Label speedLabel,EventHandler<ActionEvent> onPlayClicked,EventHandler<ActionEvent> onPauseClicked,EventHandler<ActionEvent> onStopClicked,EventHandler<ActionEvent> onSlowDownClicked,EventHandler<ActionEvent> onSpeedUpClicked,ChangeListener<Number> onSpeedChanged) {
             
         VBox animationPanel = new VBox(15);
         animationPanel.setPadding(new Insets(15));
