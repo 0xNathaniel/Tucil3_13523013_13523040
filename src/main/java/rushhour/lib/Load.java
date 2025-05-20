@@ -13,14 +13,14 @@ public class Load {
             return null;
         }
         
-        int width = scanner.nextInt();
+        int height = scanner.nextInt();
         
         if (!scanner.hasNextInt()) {
             System.out.println("Input harus integer untuk height (baris kedua)");
             return null;
         }
 
-        int height = scanner.nextInt();
+        int width = scanner.nextInt();
         if (width <= 0 || height <= 0) {
             System.out.println("Input harus lebih dari 0 untuk width dan height");
             return null;

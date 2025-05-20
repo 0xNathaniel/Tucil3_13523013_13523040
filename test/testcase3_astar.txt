@@ -15,7 +15,7 @@ Initial board state:
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 1: Car B-bawah
 +------------+
@@ -26,7 +26,7 @@ Gerakan ke- 1: Car B-bawah
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 2: Car C-bawah
 +------------+
@@ -37,7 +37,7 @@ Gerakan ke- 2: Car C-bawah
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 3: Car D-kiri
 +------------+
@@ -48,7 +48,7 @@ Gerakan ke- 3: Car D-kiri
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 4: Car D-kiri
 +------------+
@@ -59,7 +59,7 @@ Gerakan ke- 4: Car D-kiri
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 5: Car E-atas
 +------------+
@@ -70,7 +70,7 @@ Gerakan ke- 5: Car E-atas
 |. H J J F . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 6: Car F-atas
 +------------+
@@ -81,7 +81,7 @@ Gerakan ke- 6: Car F-atas
 |. H J J . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 7: Car J-kanan
 +------------+
@@ -92,7 +92,7 @@ Gerakan ke- 7: Car J-kanan
 |. H . J J . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 8: Car B-bawah
 +------------+
@@ -103,7 +103,7 @@ Gerakan ke- 8: Car B-bawah
 |. H B J J . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 9: Car B-bawah
 +------------+
@@ -114,7 +114,7 @@ Gerakan ke- 9: Car B-bawah
 |. H B J J . |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 10: Car J-kanan
 +------------+
@@ -125,7 +125,7 @@ Gerakan ke- 10: Car J-kanan
 |. H B . J J |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 11: Car C-bawah
 +------------+
@@ -136,7 +136,7 @@ Gerakan ke- 11: Car C-bawah
 |. H B C J J |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 12: Car C-bawah
 +------------+
@@ -147,7 +147,7 @@ Gerakan ke- 12: Car C-bawah
 |. H B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 13: Car P-kanan
 +------------+
@@ -158,7 +158,7 @@ Gerakan ke- 13: Car P-kanan
 |. H B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 14: Car P-kanan
 +------------+
@@ -169,7 +169,7 @@ Gerakan ke- 14: Car P-kanan
 |. H B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 15: Car H-atas
 +------------+
@@ -180,7 +180,7 @@ Gerakan ke- 15: Car H-atas
 |. . B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 16: Car H-atas
 +------------+
@@ -191,7 +191,7 @@ Gerakan ke- 16: Car H-atas
 |. . B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 17: Car H-atas
 +------------+
@@ -202,7 +202,7 @@ Gerakan ke- 17: Car H-atas
 |. . B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 18: Car P-kiri
 +------------+
@@ -213,7 +213,7 @@ Gerakan ke- 18: Car P-kiri
 |. . B C J J |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 19: Car C-atas
 +------------+
@@ -224,7 +224,7 @@ Gerakan ke- 19: Car C-atas
 |. . B C J J |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 20: Car C-atas
 +------------+
@@ -235,7 +235,7 @@ Gerakan ke- 20: Car C-atas
 |. . B . J J |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 21: Car J-kiri
 +------------+
@@ -246,7 +246,7 @@ Gerakan ke- 21: Car J-kiri
 |. . B J J . |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 22: Car P-kiri
 +------------+
@@ -257,7 +257,7 @@ Gerakan ke- 22: Car P-kiri
 |. . B J J . |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 23: Car B-atas
 +------------+
@@ -268,7 +268,7 @@ Gerakan ke- 23: Car B-atas
 |. . B J J . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 24: Car B-atas
 +------------+
@@ -279,7 +279,7 @@ Gerakan ke- 24: Car B-atas
 |. . . J J . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 25: Car J-kiri
 +------------+
@@ -290,7 +290,7 @@ Gerakan ke- 25: Car J-kiri
 |. . J J . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 26: Car J-kiri
 +------------+
@@ -301,7 +301,7 @@ Gerakan ke- 26: Car J-kiri
 |. J J . . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 27: Car J-kiri
 +------------+
@@ -312,7 +312,7 @@ Gerakan ke- 27: Car J-kiri
 |J J . . . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 28: Car B-bawah
 +------------+
@@ -323,7 +323,7 @@ Gerakan ke- 28: Car B-bawah
 |J J B . . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 29: Car C-bawah
 +------------+
@@ -334,7 +334,7 @@ Gerakan ke- 29: Car C-bawah
 |J J B C . . |
 |. . . . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 30: Car B-bawah
 +------------+
@@ -345,7 +345,7 @@ Gerakan ke- 30: Car B-bawah
 |J J B C . . |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 31: Car P-kanan
 +------------+
@@ -356,7 +356,7 @@ Gerakan ke- 31: Car P-kanan
 |J J B C . . |
 |. . B . . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 32: Car C-bawah
 +------------+
@@ -367,7 +367,7 @@ Gerakan ke- 32: Car C-bawah
 |J J B C . . |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 33: Car F-bawah
 +------------+
@@ -378,7 +378,7 @@ Gerakan ke- 33: Car F-bawah
 |J J B C F . |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 34: Car P-kanan
 +------------+
@@ -389,7 +389,7 @@ Gerakan ke- 34: Car P-kanan
 |J J B C F . |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 35: Car P-kanan
 +------------+
@@ -400,7 +400,7 @@ Gerakan ke- 35: Car P-kanan
 |J J B C F . |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 
 Gerakan ke- 36: Car P-kanan
 +------------+
@@ -411,5 +411,5 @@ Gerakan ke- 36: Car P-kanan
 |J J B C F . |
 |. . B C . . |
 +------------+
-Door at position: (6, 2)
+Door at position: (2, 6)
 

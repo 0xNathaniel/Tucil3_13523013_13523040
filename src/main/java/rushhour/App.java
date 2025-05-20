@@ -11,7 +11,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.control.Alert;
 import javafx.scene.transform.Scale;
 import javafx.geometry.Point2D;
 
@@ -206,7 +205,6 @@ public class App extends Application {
         int height = board.getHeight();
         int width = board.getWidth();
         
-        // Print top border
         writer.print("+");
         for (int x = 0; x < width; x++) {
             writer.print("--");
@@ -229,7 +227,7 @@ public class App extends Application {
         
         int doorX = board.getDoorX();
         int doorY = board.getDoorY();
-        writer.println("Door at position: (" + doorX + ", " + doorY + ")");
+        writer.println("Door at position: (" + doorY + ", " + doorX + ")");
     }
     
     private HBox createZoomControls() {
@@ -498,7 +496,25 @@ public class App extends Application {
                     saveButton.setDisable(true);
                     resetAnimationControls();
                 } else {
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Solution Found!");
+                    successAlert.setHeaderText("Puzzle Solved Successfully!");
+                    successAlert.setContentText(
+                        "Algorithm: " + algo + 
+                        (heuristic != null ? " with " + heuristic + " heuristic" : "") +
+                        "\nMoves required: " + moves.size() + 
+                        "\nNodes explored: " + finalNodes + 
+                        "\nTime elapsed: " + finalTime + " ms" +
+                        "\n\nClick Play to see the solution animation!"
+                    );
+                    successAlert.show();
+                    
                     statusLabel.setText("Solution found with " + moves.size() + " moves!");
+                    statusLabel.getStyleClass().add("success-status");
+                    PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                    pause.setOnFinished(e -> statusLabel.getStyleClass().remove("success-status"));
+                    pause.play();
+                    
                     moveCountLabel.setText("Move: 0 / " + moves.size());
                     
                     playButton.setDisable(false);

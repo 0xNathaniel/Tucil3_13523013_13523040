@@ -15,7 +15,7 @@ Initial board state:
 |. C C . B B |
 |A A A . D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
 Gerakan ke- 1: Car X-kiri
 +------------+
@@ -26,7 +26,7 @@ Gerakan ke- 1: Car X-kiri
 |. C C . B B |
 |A A A . D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
 Gerakan ke- 2: Car X-kiri
 +------------+
@@ -37,7 +37,7 @@ Gerakan ke- 2: Car X-kiri
 |. C C . B B |
 |A A A . D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
 Gerakan ke- 3: Car P-bawah
 +------------+
@@ -48,7 +48,7 @@ Gerakan ke- 3: Car P-bawah
 |. C C . B B |
 |A A A . D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
 Gerakan ke- 4: Car P-bawah
 +------------+
@@ -59,7 +59,7 @@ Gerakan ke- 4: Car P-bawah
 |. C C P B B |
 |A A A . D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
 Gerakan ke- 5: Car P-bawah
 +------------+
@@ -70,5 +70,5 @@ Gerakan ke- 5: Car P-bawah
 |. C C P B B |
 |A A A P D D |
 +------------+
-Door at position: (3, 6)
+Door at position: (6, 3)
 
